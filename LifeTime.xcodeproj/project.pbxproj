@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E14DB61E136E11002A6ED0 /* TimerViewController.m */; };
 		83D84E981E136BB100FF2B04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E971E136BB100FF2B04 /* main.m */; };
 		83D84E9B1E136BB100FF2B04 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E9A1E136BB100FF2B04 /* AppDelegate.m */; };
 		83D84E9E1E136BB100FF2B04 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E9D1E136BB100FF2B04 /* ViewController.m */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07E14DB51E136E11002A6ED0 /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimerViewController.h; path = LifeTime/TimerViewController.h; sourceTree = "<group>"; };
+		07E14DB61E136E11002A6ED0 /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimerViewController.m; path = LifeTime/TimerViewController.m; sourceTree = "<group>"; };
 		83D84E931E136BB100FF2B04 /* LifeTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D84E971E136BB100FF2B04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83D84E991E136BB100FF2B04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,6 +45,8 @@
 		83D84E8A1E136BB100FF2B04 = {
 			isa = PBXGroup;
 			children = (
+				07E14DB51E136E11002A6ED0 /* TimerViewController.h */,
+				07E14DB61E136E11002A6ED0 /* TimerViewController.m */,
 				83D84E951E136BB100FF2B04 /* LifeTime */,
 				83D84E941E136BB100FF2B04 /* Products */,
 			);
@@ -150,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */,
 				83D84E9E1E136BB100FF2B04 /* ViewController.m in Sources */,
 				83D84E9B1E136BB100FF2B04 /* AppDelegate.m in Sources */,
 				83D84E981E136BB100FF2B04 /* main.m in Sources */,
@@ -309,6 +315,7 @@
 				83D84EAC1E136BB100FF2B04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
