@@ -78,53 +78,56 @@
     NSString *timeString = [dateFormatter stringFromDate:timerDate];
     self.timerLbl.text = timeString;
 }
-
 - (IBAction)startBtn:(id)sender {
     NSLog(@"startBtn Pressed!");
     if([[(UIButton *)sender currentTitle]isEqualToString:@"START"]) {
         NSLog(@"equalToString: start!");
-        if (resetPressed) {
+        if (!resetPressed) {
+            NSLog(@"!resetPressed");
+            //start the action here
+            self.startDate = [NSDate date];
+            // Create a stopwatch timer that fires every 100 ms
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
+                                                          target:self
+                                                        selector:@selector(updateTimer)
+                                                        userInfo:nil
+                                                         repeats:YES];
+        }
+        else {
+            NSLog(@"resetPressed!");
             [_resetBtn setEnabled:NO];
             [_resetBtn setTitle:@"" forState:UIControlStateNormal];
             resetPressed = false;
-
+            
+            [self updateTimer];
         }
-        //start the action here
-        self.startDate = [NSDate date];
         
-        // Create a stopwatch timer that fires every 100 ms
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
-                                                      target:self
-                                                    selector:@selector(updateTimer)
-                                                    userInfo:nil
-                                                     repeats:YES];
-
+        
         // change the button text to STOP
         [sender setTitle:@"STOP" forState:UIControlStateNormal];
-        
-        
     }
     else if([[(UIButton *)sender currentTitle]isEqualToString:@"STOP"]){
         NSLog(@"equalToString: stop!");
-        resetPressed = true;
         
         [_resetBtn setEnabled:YES];
         [_resetBtn setTitle:@"RESET" forState:UIControlStateNormal];
-
-        //stop the action here
+        
+        // stop the action here
         [self.timer invalidate];
-//        self.timer = nil;
-//        [self updateTimer];
+        //        self.timer = nil;
+        //        [self updateTimer];
         
         // change the button text to START
         [sender setTitle:@"START" forState:UIControlStateNormal];
     }
-   }
+}
+
 - (IBAction)resetBtn:(id)sender {
     NSLog(@"resetBtn");
-
+    
     [self.timer invalidate];
     self.timer = nil;
+    self.startDate = [NSDate date];
     [self updateTimer];
     resetPressed = true;
 }
