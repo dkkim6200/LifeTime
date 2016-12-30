@@ -8,7 +8,9 @@
 
 #import "TimerViewController.h"
 
-@interface TimerViewController ()
+@interface TimerViewController () {
+    NSArray *activityCategories;
+}
 
 @end
 
@@ -16,12 +18,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after ∂loading the view.
+    
+    activityCategories = @[@"Work",
+                           @"Study",
+                           @"Exercise",
+                           @"Rest",
+                           @"Eat",
+                           @"Fun",
+                           @"Social",
+                           @"Food",
+                           @"Shopping",
+                           @"Religious",
+                           @"Etc"];
+    
+    self.activityCategoryPicker.dataSource = self;
+    self.activityCategoryPicker.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// Number of columns in the
+- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (int)pickerView:(UIPickerView *) pickerView numberOfRowsInComponent:(NSInteger)component {
+    return activityCategories.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return activityCategories[row];
 }
 
 /*
