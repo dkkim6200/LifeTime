@@ -11,6 +11,7 @@
 @interface TimerViewController () {
     NSArray *activityCategories;
     BOOL resetPressed;
+    BOOL firstStartBtnPressed;
 }
 @property (strong, nonatomic) NSTimer *timer; // Store the timer that fires after a certain time
 @property (strong, nonatomic) NSDate *startDate; // Stores the date of the click on the start button
@@ -24,6 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    firstStartBtnPressed = false;
+    resetPressed = false;
+
 //    [_startBtn setExclusiveTouch:YES];
 //    [_resetBtn setExclusiveTouch:YES];
 
@@ -82,12 +86,11 @@
 }
 - (IBAction)startBtn:(id)sender {
     NSLog(@"startBtn Pressed!");
-    resetPressed = false;
-    
     if([[(UIButton *)sender currentTitle]isEqualToString:@"START"]) {
         NSLog(@"equalToString: start!");
-        if (!resetPressed) {
-            NSLog(@"!resetPressed");
+        if (!firstStartBtnPressed) {
+            NSLog(@"!firstStartButtonPressed");
+            firstStartBtnPressed = true;
             //start the action here
             self.startDate = [NSDate date];
             // Create a stopwatch timer that fires every 100 ms
@@ -97,16 +100,26 @@
                                                         userInfo:nil
                                                          repeats:YES];
         }
+        
+        if (!resetPressed) {
+            NSLog(@"!resetPressed!");
+
+            [self updateTimer];
+        }
         else {
             NSLog(@"resetPressed!");
             resetPressed = false;
             [_resetBtn setEnabled:NO];
             [_resetBtn setTitle:@"" forState:UIControlStateNormal];
 
-            [self updateTimer];
+            self.startDate = [NSDate date];
+            // Create a stopwatch timer that fires every 100 ms
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
+                                                          target:self
+                                                        selector:@selector(updateTimer)
+                                                        userInfo:nil
+                                                         repeats:YES];
         }
-        
-        
         // change the button text to STOP
         [sender setTitle:@"STOP" forState:UIControlStateNormal];
     }
