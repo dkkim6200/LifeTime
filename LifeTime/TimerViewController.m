@@ -24,7 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+//    [_startBtn setExclusiveTouch:YES];
+//    [_resetBtn setExclusiveTouch:YES];
+
     activityCategories = @[@"Work",
                            @"Study",
                            @"Exercise",
@@ -80,6 +82,8 @@
 }
 - (IBAction)startBtn:(id)sender {
     NSLog(@"startBtn Pressed!");
+    resetPressed = false;
+    
     if([[(UIButton *)sender currentTitle]isEqualToString:@"START"]) {
         NSLog(@"equalToString: start!");
         if (!resetPressed) {
@@ -95,10 +99,10 @@
         }
         else {
             NSLog(@"resetPressed!");
+            resetPressed = false;
             [_resetBtn setEnabled:NO];
             [_resetBtn setTitle:@"" forState:UIControlStateNormal];
-            resetPressed = false;
-            
+
             [self updateTimer];
         }
         
@@ -130,6 +134,9 @@
     self.startDate = [NSDate date];
     [self updateTimer];
     resetPressed = true;
+    
+    [_resetBtn setEnabled:NO];
+    [_resetBtn setTitle:@"" forState:UIControlStateNormal];
 }
 
 /*
