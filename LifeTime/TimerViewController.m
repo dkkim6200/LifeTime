@@ -19,28 +19,17 @@
 
 }
 @property (strong, nonatomic) NSTimer *timer; // Store the timer that fires after a certain time
-//@property (strong, nonatomic) NSDate *startDate; // Stores the date of the click on the start button
-
-
-//@property (strong, nonatomic) NSDate *pauseStart;
-//@property (strong, nonatomic) NSDate *previousFireDate;
 
 @end
 
 @implementation TimerViewController
-
-//@synthesize startBtn = _startBtn;
-//@synthesize startStopButtonIsActive = _startStopButtonIsActive;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     firstStartBtnPressed = false;
     resetPressed = false;
     stopPressed = false;
-
-//    [_startBtn setExclusiveTouch:YES];
-//    [_resetBtn setExclusiveTouch:YES];
-
+    
     activityCategories = @[@"Work",
                            @"Study",
                            @"Exercise",
