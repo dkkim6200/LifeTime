@@ -9,20 +9,24 @@
 #import "TimerViewController.h"
 
 @interface TimerViewController () {
-    NSArray *activityCategories;
-    BOOL resetPressed;
-    BOOL firstStartBtnPressed;
-    BOOL stopPressed;
-    NSTimeInterval pauseResumeInterval;
-    
-    NSDate *pausedTime, *resumedTime, *initialStartTime;
 
 }
 @property (strong, nonatomic) NSTimer *timer; // Store the timer that fires after a certain time
 
 @end
 
-@implementation TimerViewController
+@implementation TimerViewController {
+    NSArray *activityCategories;
+    
+    //----------------------------------------------------------------------
+    // timer related
+    //----------------------------------------------------------------------
+    BOOL resetPressed;
+    BOOL firstStartBtnPressed;
+    BOOL stopPressed;
+    NSTimeInterval pauseResumeInterval;
+    NSDate *pausedTime, *resumedTime, *initialStartTime;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -118,23 +122,27 @@
     
 }
 
+-(void) initTimer {
+    firstStartBtnPressed = true;
+    resetPressed = false;
+    stopPressed = false;
+    
+    initialStartTime = [NSDate date];
+    pauseResumeInterval = 0;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
+                                                  target:self
+                                                selector:@selector(updateTimer)
+                                                userInfo:nil
+                                                 repeats:YES];
+    
+}
+
 - (IBAction)startBtn:(id)sender {
     if([[(UIButton *)sender currentTitle]isEqualToString:@"START"]) {
         
         // same codes are required when reset button was pressed and when the timer is initially started
         if (resetPressed || !firstStartBtnPressed) {
-//            NSLog(@"resetPressed || !firstStartBtnPressed");
-            firstStartBtnPressed = true;
-            resetPressed = false;
-            stopPressed = false;
-            
-            initialStartTime = [NSDate date];
-            pauseResumeInterval = 0;
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
-                                                          target:self
-                                                        selector:@selector(updateTimer)
-                                                        userInfo:nil
-                                                         repeats:YES];
+            [self initTimer];
         }
         
         if (stopPressed && !resetPressed) {
