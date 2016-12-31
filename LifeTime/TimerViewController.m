@@ -89,56 +89,6 @@
     NSString *timeString = [dateFormatter stringFromDate:currentTime];
     self.timerLbl.text = timeString;
 }
-//// timer를 그리는 아이
-//- (void)updateTimer {
-//    // Create date from the elapsed time
-//    NSDate *currentDate = [NSDate date];
-//    
-//    // Timer time = current time - intial time - pausedInterval
-//    NSTimeInterval timeInterval =
-//    [currentDate timeIntervalSinceDate:[initialStartTime dateByAddingTimeInterval: pauseResumeInterval]];
-////    NSLog(@"timeInterval: %f", timeInterval);
-//    
-//    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-//    
-//    // Create a date formatter
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"mm:ss"]; // minute과 second로 이루어져있음
-//    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-//    
-//    // Format the elapsed time and set it to the timerLbl
-//    NSString *timeString = [dateFormatter stringFromDate:timerDate];
-//    self.timerLbl.text = timeString;
-//}
-//
-//-(void) pauseTimer {
-//    // save the time where the timer was paused
-//    pausedTime = [NSDate date];
-//    
-//    // actually pause the timer
-//    [self.timer setFireDate:[NSDate distantFuture]];
-//}
-//
-//-(void) resumeTimer {
-//    // save the time where the timer was resumed
-//    resumedTime = [NSDate date];
-//    
-//    // calculate the amount of total time the timer was paused
-//    pauseResumeInterval += [resumedTime timeIntervalSinceDate:pausedTime];
-//    
-//    [self initTimer];
-//}
-//
-//-(void) initTimer {
-//    [self.timer invalidate];s
-//    self.timer = nil;
-//    
-//    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
-//                                                  target:self
-//                                                selector:@selector(updateTimer)
-//                                                userInfo:nil
-//                                                 repeats:YES];
-//}
 
 - (IBAction)startBtn:(id)sender {
     if([[(UIButton *)sender currentTitle]isEqualToString:@"START"]) {
@@ -186,7 +136,6 @@
     resetPressed = true;
     [self.timer resetTimer]; // redundant??????????????????????????????????????????????????????????????????????
 //    self.timerLbl.text = @"00:00";
-    
     
     // resetBtn disappeared
     [_resetBtn setEnabled:NO];

@@ -23,7 +23,7 @@
     return self;
     
 }
-// timer를 그리는 아이
+// timer 시간을 주기적으로 생성하는 아이
 - (void)updateTimer {
     // Create date from the elapsed time
     NSDate *currentDate = [NSDate date];
@@ -59,12 +59,14 @@
     [self.timer invalidate];
     self.timer = nil;
     
-    [self startTimer];
-}
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
+                                                  target:self
+                                                selector:@selector(updateTimer)
+                                                userInfo:nil
+                                                 repeats:YES];}
 
 -(void) resetTimer {
-    initialStartTime = [NSDate date];
-    pauseResumeInterval = 0;
+
     timerDate = [NSDate dateWithTimeIntervalSince1970:0];
 
     [self.timer invalidate];
@@ -72,6 +74,9 @@
 }
 
 -(void) startTimer {
+    initialStartTime = [NSDate date];
+    pauseResumeInterval = 0;
+    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
                                                   target:self
                                                 selector:@selector(updateTimer)
