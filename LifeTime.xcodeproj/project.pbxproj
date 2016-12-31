@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E14DB61E136E11002A6ED0 /* TimerViewController.m */; };
+		836E08D91E175F0D00B3FEA5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 836E08D81E175F0D00B3FEA5 /* DBManager.m */; };
 		83D84E981E136BB100FF2B04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E971E136BB100FF2B04 /* main.m */; };
 		83D84E9B1E136BB100FF2B04 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E9A1E136BB100FF2B04 /* AppDelegate.m */; };
 		83D84EA11E136BB100FF2B04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D84E9F1E136BB100FF2B04 /* Main.storyboard */; };
@@ -18,6 +19,8 @@
 /* Begin PBXFileReference section */
 		07E14DB51E136E11002A6ED0 /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		07E14DB61E136E11002A6ED0 /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
+		836E08D71E175F0D00B3FEA5 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		836E08D81E175F0D00B3FEA5 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		83D84E931E136BB100FF2B04 /* LifeTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D84E971E136BB100FF2B04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83D84E991E136BB100FF2B04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -62,6 +65,8 @@
 				83D84E9A1E136BB100FF2B04 /* AppDelegate.m */,
 				07E14DB51E136E11002A6ED0 /* TimerViewController.h */,
 				07E14DB61E136E11002A6ED0 /* TimerViewController.m */,
+				836E08D71E175F0D00B3FEA5 /* DBManager.h */,
+				836E08D81E175F0D00B3FEA5 /* DBManager.m */,
 				83D84E9F1E136BB100FF2B04 /* Main.storyboard */,
 				83D84EA21E136BB100FF2B04 /* Assets.xcassets */,
 				83D84EA41E136BB100FF2B04 /* LaunchScreen.storyboard */,
@@ -153,6 +158,7 @@
 				07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */,
 				83D84E9B1E136BB100FF2B04 /* AppDelegate.m in Sources */,
 				83D84E981E136BB100FF2B04 /* main.m in Sources */,
+				836E08D91E175F0D00B3FEA5 /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
