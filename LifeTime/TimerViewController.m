@@ -107,34 +107,19 @@
     
     // calculate the amount of total time the timer was paused
     pauseResumeInterval += [resumedTime timeIntervalSinceDate:pausedTime];
-//    NSLog(@"resumeTimer:pauseResumeInterval: %f", pauseResumeInterval);
-
-    // get rid of the old timer
-    [self.timer invalidate];
-    self.timer = nil;
     
-    // start a new timer
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
-                                                  target:self
-                                                selector:@selector(updateTimer)
-                                                userInfo:nil
-                                                 repeats:YES];
-    
+    [self initTimer];
 }
 
 -(void) initTimer {
-    firstStartBtnPressed = true;
-    resetPressed = false;
-    stopPressed = false;
+    [self.timer invalidate];
+    self.timer = nil;
     
-    initialStartTime = [NSDate date];
-    pauseResumeInterval = 0;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
                                                   target:self
                                                 selector:@selector(updateTimer)
                                                 userInfo:nil
                                                  repeats:YES];
-    
 }
 
 - (IBAction)startBtn:(id)sender {
@@ -142,6 +127,13 @@
         
         // same codes are required when reset button was pressed and when the timer is initially started
         if (resetPressed || !firstStartBtnPressed) {
+            firstStartBtnPressed = true;
+            resetPressed = false;
+            stopPressed = false;
+            
+            initialStartTime = [NSDate date];
+            pauseResumeInterval = 0;
+            
             [self initTimer];
         }
         
@@ -176,9 +168,6 @@
 
 - (IBAction)resetBtn:(id)sender {
     resetPressed = true;
-
-    [self.timer invalidate];
-    self.timer = nil;
     self.timerLbl.text = @"00:00";
     
     // resetBtn disappeared
