@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		076F3DB31E17771E006999E9 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 076F3DB21E17771E006999E9 /* Timer.m */; };
 		07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E14DB61E136E11002A6ED0 /* TimerViewController.m */; };
 		836E08D91E175F0D00B3FEA5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 836E08D81E175F0D00B3FEA5 /* DBManager.m */; };
 		836E08DC1E176D5D00B3FEA5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 836E08DB1E176D5D00B3FEA5 /* libsqlite3.tbd */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		076F3DB11E17771E006999E9 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
+		076F3DB21E17771E006999E9 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
 		07E14DB51E136E11002A6ED0 /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		07E14DB61E136E11002A6ED0 /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
 		836E08D71E175F0D00B3FEA5 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
@@ -84,6 +87,8 @@
 				83D84EA41E136BB100FF2B04 /* LaunchScreen.storyboard */,
 				83D84EA71E136BB100FF2B04 /* Info.plist */,
 				83D84E961E136BB100FF2B04 /* Supporting Files */,
+				076F3DB11E17771E006999E9 /* Timer.h */,
+				076F3DB21E17771E006999E9 /* Timer.m */,
 			);
 			path = LifeTime;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				076F3DB31E17771E006999E9 /* Timer.m in Sources */,
 				07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */,
 				83D84E9B1E136BB100FF2B04 /* AppDelegate.m in Sources */,
 				83D84E981E136BB100FF2B04 /* main.m in Sources */,
