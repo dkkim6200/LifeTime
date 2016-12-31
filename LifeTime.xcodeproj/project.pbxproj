@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E14DB61E136E11002A6ED0 /* TimerViewController.m */; };
 		836E08D91E175F0D00B3FEA5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 836E08D81E175F0D00B3FEA5 /* DBManager.m */; };
+		836E08DC1E176D5D00B3FEA5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 836E08DB1E176D5D00B3FEA5 /* libsqlite3.tbd */; };
 		83D84E981E136BB100FF2B04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E971E136BB100FF2B04 /* main.m */; };
 		83D84E9B1E136BB100FF2B04 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E9A1E136BB100FF2B04 /* AppDelegate.m */; };
 		83D84EA11E136BB100FF2B04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D84E9F1E136BB100FF2B04 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 		07E14DB61E136E11002A6ED0 /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
 		836E08D71E175F0D00B3FEA5 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		836E08D81E175F0D00B3FEA5 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		836E08DB1E176D5D00B3FEA5 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		83D84E931E136BB100FF2B04 /* LifeTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D84E971E136BB100FF2B04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83D84E991E136BB100FF2B04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -36,17 +38,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				836E08DC1E176D5D00B3FEA5 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		836E08DA1E176D5D00B3FEA5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				836E08DB1E176D5D00B3FEA5 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		83D84E8A1E136BB100FF2B04 = {
 			isa = PBXGroup;
 			children = (
 				83D84E951E136BB100FF2B04 /* LifeTime */,
 				83D84E941E136BB100FF2B04 /* Products */,
+				836E08DA1E176D5D00B3FEA5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
