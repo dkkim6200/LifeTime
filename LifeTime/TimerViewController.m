@@ -12,9 +12,18 @@
     NSArray *activityCategories;
     BOOL resetPressed;
     BOOL firstStartBtnPressed;
+    BOOL stopPressed;
+    NSTimeInterval pauseResumeInterval;
+    
+    NSDate *pausedTime, *resumedTime, *initialStartTime;
+
 }
 @property (strong, nonatomic) NSTimer *timer; // Store the timer that fires after a certain time
-@property (strong, nonatomic) NSDate *startDate; // Stores the date of the click on the start button
+//@property (strong, nonatomic) NSDate *startDate; // Stores the date of the click on the start button
+
+
+//@property (strong, nonatomic) NSDate *pauseStart;
+//@property (strong, nonatomic) NSDate *previousFireDate;
 
 @end
 
@@ -27,6 +36,7 @@
     [super viewDidLoad];
     firstStartBtnPressed = false;
     resetPressed = false;
+    stopPressed = false;
 
 //    [_startBtn setExclusiveTouch:YES];
 //    [_resetBtn setExclusiveTouch:YES];
@@ -68,11 +78,16 @@
     return activityCategories[row];
 }
 
-- (void)updateTimer
-{
+// timer를 그리는 아이
+- (void)updateTimer {
     // Create date from the elapsed time
     NSDate *currentDate = [NSDate date];
-    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:self.startDate];
+    
+    // Timer time = current time - intial time - pausedInterval
+    NSTimeInterval timeInterval =
+    [currentDate timeIntervalSinceDate:[initialStartTime dateByAddingTimeInterval: pauseResumeInterval]];
+//    NSLog(@"timeInterval: %f", timeInterval);
+    
     NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     
     // Create a date formatter
@@ -84,16 +99,48 @@
     NSString *timeString = [dateFormatter stringFromDate:timerDate];
     self.timerLbl.text = timeString;
 }
+
+-(void) pauseTimer {
+    // save the time where the timer was paused
+    pausedTime = [NSDate date];
+    
+    // actually pause the timer
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
+
+-(void) resumeTimer {
+    // save the time where the timer was resumed
+    resumedTime = [NSDate date];
+    
+    // calculate the amount of total time the timer was paused
+    pauseResumeInterval += [resumedTime timeIntervalSinceDate:pausedTime];
+//    NSLog(@"resumeTimer:pauseResumeInterval: %f", pauseResumeInterval);
+
+    // get rid of the old timer
+    [self.timer invalidate];
+    self.timer = nil;
+    
+    // start a new timer
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
+                                                  target:self
+                                                selector:@selector(updateTimer)
+                                                userInfo:nil
+                                                 repeats:YES];
+    
+}
+
 - (IBAction)startBtn:(id)sender {
-    NSLog(@"startBtn Pressed!");
     if([[(UIButton *)sender currentTitle]isEqualToString:@"START"]) {
-        NSLog(@"equalToString: start!");
-        if (!firstStartBtnPressed) {
-            NSLog(@"!firstStartButtonPressed");
+        
+        // same codes are required when reset button was pressed and when the timer is initially started
+        if (resetPressed || !firstStartBtnPressed) {
+//            NSLog(@"resetPressed || !firstStartBtnPressed");
             firstStartBtnPressed = true;
-            //start the action here
-            self.startDate = [NSDate date];
-            // Create a stopwatch timer that fires every 100 ms
+            resetPressed = false;
+            stopPressed = false;
+            
+            initialStartTime = [NSDate date];
+            pauseResumeInterval = 0;
             self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
                                                           target:self
                                                         selector:@selector(updateTimer)
@@ -101,56 +148,47 @@
                                                          repeats:YES];
         }
         
-        if (!resetPressed) {
-            NSLog(@"!resetPressed!");
-
-            [self updateTimer];
-        }
-        else {
-            NSLog(@"resetPressed!");
-            resetPressed = false;
+        if (stopPressed && !resetPressed) {
+            stopPressed = false;
+            [self resumeTimer];
+            
+            // resetBtn disappeared
             [_resetBtn setEnabled:NO];
             [_resetBtn setTitle:@"" forState:UIControlStateNormal];
-
-            self.startDate = [NSDate date];
-            // Create a stopwatch timer that fires every 100 ms
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
-                                                          target:self
-                                                        selector:@selector(updateTimer)
-                                                        userInfo:nil
-                                                         repeats:YES];
         }
+        
         // change the button text to STOP
         [sender setTitle:@"STOP" forState:UIControlStateNormal];
-    }
-    else if([[(UIButton *)sender currentTitle]isEqualToString:@"STOP"]){
-        NSLog(@"equalToString: stop!");
         
+        
+    }
+    
+    else if([[(UIButton *)sender currentTitle]isEqualToString:@"STOP"]){
+        stopPressed = true;
+        
+        [self pauseTimer];
+        
+        // resetBtn appear
         [_resetBtn setEnabled:YES];
         [_resetBtn setTitle:@"RESET" forState:UIControlStateNormal];
-        
-        // stop the action here
-        [self.timer invalidate];
-        //        self.timer = nil;
-        //        [self updateTimer];
-        
+
         // change the button text to START
         [sender setTitle:@"START" forState:UIControlStateNormal];
     }
 }
 
 - (IBAction)resetBtn:(id)sender {
-    NSLog(@"resetBtn");
-    
+    resetPressed = true;
+
     [self.timer invalidate];
     self.timer = nil;
-    self.startDate = [NSDate date];
-    [self updateTimer];
-    resetPressed = true;
+    self.timerLbl.text = @"00:00";
     
+    // resetBtn disappeared
     [_resetBtn setEnabled:NO];
     [_resetBtn setTitle:@"" forState:UIControlStateNormal];
 }
+
 
 /*
 #pragma mark - Navigation
