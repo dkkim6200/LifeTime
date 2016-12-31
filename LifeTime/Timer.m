@@ -8,6 +8,75 @@
 
 #import "Timer.h"
 
-@implementation Timer
+@implementation Timer {
+    NSTimeInterval pauseResumeInterval;
+    NSDate *timerDate, *pausedTime, *resumedTime, *initialStartTime;
+}
+
+-(id) init {
+    self = [super init];
+    
+    if(self) {
+        timerDate = [NSDate dateWithTimeIntervalSince1970:0];
+    }
+    
+    return self;
+    
+}
+// timer를 그리는 아이
+- (void)updateTimer {
+    // Create date from the elapsed time
+    NSDate *currentDate = [NSDate date];
+    
+    // Timer time = current time - intial time - pausedInterval
+    NSTimeInterval timeInterval =
+    [currentDate timeIntervalSinceDate:[initialStartTime dateByAddingTimeInterval: pauseResumeInterval]];
+    //    NSLog(@"timeInterval: %f", timeInterval);
+    
+    timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+
+}
+
+-(NSDate *) getTime {
+    return timerDate;
+}
+
+-(void) pauseTimer {
+    // save the time where the timer was paused
+    pausedTime = [NSDate date];
+    
+    // actually pause the timer
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
+
+-(void) resumeTimer {
+    // save the time where the timer was resumed
+    resumedTime = [NSDate date];
+    
+    // calculate the amount of total time the timer was paused
+    pauseResumeInterval += [resumedTime timeIntervalSinceDate:pausedTime];
+    
+    [self.timer invalidate];
+    self.timer = nil;
+    
+    [self startTimer];
+}
+
+-(void) resetTimer {
+    initialStartTime = [NSDate date];
+    pauseResumeInterval = 0;
+    timerDate = [NSDate dateWithTimeIntervalSince1970:0];
+
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+-(void) startTimer {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
+                                                  target:self
+                                                selector:@selector(updateTimer)
+                                                userInfo:nil
+                                                 repeats:YES];
+}
 
 @end

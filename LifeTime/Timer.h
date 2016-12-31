@@ -10,4 +10,13 @@
 
 @interface Timer : NSObject
 
+@property (strong, nonatomic) NSTimer *timer; // Store the timer that fires after a certain time
+
+-(NSDate *)getTime;
+
+-(void) pauseTimer;
+-(void) resumeTimer;
+-(void) resetTimer;
+-(void) startTimer;
+
 @end
