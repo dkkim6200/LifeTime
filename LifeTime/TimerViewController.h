@@ -10,10 +10,13 @@
 
 @interface TimerViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIPickerView *activityCategoryPicker;
+@property (weak, nonatomic) IBOutlet UIPickerView *categoryPicker;
+
 @property (weak, nonatomic) IBOutlet UILabel *timerLbl;
 @property (weak, nonatomic) IBOutlet UIButton *startBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *resetBtn;
+
+@property (weak, nonatomic) IBOutlet UILabel *categoryLbl;
 
 @end

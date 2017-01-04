@@ -49,8 +49,8 @@
                            @"Religious",
                            @"Etc"];
     
-    _activityCategoryPicker.dataSource = self;
-    _activityCategoryPicker.delegate = self;
+    _categoryPicker.dataSource = self;
+    _categoryPicker.delegate = self;
     
     [_startBtn addTarget:self action:@selector(startBtn) forControlEvents:UIControlEventTouchUpInside];
     
@@ -198,11 +198,18 @@
 
 - (IBAction)categorySelectBtn:(id)sender {
     int row;
-    row = [_activityCategoryPicker selectedRowInComponent:0];
+    row = [_categoryPicker selectedRowInComponent:0];
     NSString *selectedCategory = [_activityCategories objectAtIndex:row];
     [_activity setCategory: selectedCategory];
     
     NSLog (@"selected activity: %@", selectedCategory);
+    
+//    [_activityCategoryPicker setUserInteractionEnabled:false];
+    [_categoryPicker setAlpha:0]; // if ok button is pressed, picker "dissappears" = transparent
+    [_categoryLbl setEnabled:true];
+    [_categoryLbl setAlpha:1];
+    _categoryLbl.text = selectedCategory;
+    
 }
 
 /*
