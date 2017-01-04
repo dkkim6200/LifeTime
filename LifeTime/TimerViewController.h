@@ -16,7 +16,4 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *resetBtn;
 
-// to change start button to stop button, vice versa
-//@property (nonatomic) BOOL startStopButtonIsActive;
-
 @end

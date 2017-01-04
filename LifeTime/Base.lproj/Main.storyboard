@@ -31,6 +31,9 @@
                                 <state key="normal" title="OK">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="categorySelectBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NY1-rJ-HBM"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Describe the event..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LXO-Db-ieq">
                                 <rect key="frame" x="16" y="157" width="343" height="30"/>

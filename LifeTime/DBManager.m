@@ -24,6 +24,7 @@
 //phase #3
 -(NSArray *)loadDataFromDB:(NSString *)query;
 -(void)executeQuery:(NSString *)query;
+
 @end
 
 @implementation DBManager 
