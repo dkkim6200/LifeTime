@@ -92,61 +92,13 @@
     NSString *timeString = [dateFormatter stringFromDate:currentTime];
     _timerLbl.text = timeString;
 }
-//// timer를 그리는 아이
-//- (void)updateTimer {
-//    // Create date from the elapsed time
-//    NSDate *currentDate = [NSDate date];
-//    
-//    // Timer time = current time - intial time - pausedInterval
-//    NSTimeInterval timeInterval =
-//    [currentDate timeIntervalSinceDate:[initialStartTime dateByAddingTimeInterval: pauseResumeInterval]];
-////    NSLog(@"timeInterval: %f", timeInterval);
-//    
-//    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-//    
-//    // Create a date formatter
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"mm:ss"]; // minute과 second로 이루어져있음
-//    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-//    
-//    // Format the elapsed time and set it to the timerLbl
-//    NSString *timeString = [dateFormatter stringFromDate:timerDate];
-//    _timerLbl.text = timeString;
-//}
-//
-//-(void) pauseTimer {
-//    // save the time where the timer was paused
-//    pausedTime = [NSDate date];
-//    
-//    // actually pause the timer
-//    [_timer setFireDate:[NSDate distantFuture]];
-//}
-//
-//-(void) resumeTimer {
-//    // save the time where the timer was resumed
-//    resumedTime = [NSDate date];
-//    
-//    // calculate the amount of total time the timer was paused
-//    pauseResumeInterval += [resumedTime timeIntervalSinceDate:pausedTime];
-//    
-//    [self initTimer];
-//}
-//
-//-(void) initTimer {
-//    [_timer invalidate];s
-//    _timer = nil;
-//    
-//    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
-//                                                  target:self
-//                                                selector:@selector(updateTimer)
-//                                                userInfo:nil
-//                                                 repeats:YES];
-//}
 
 - (IBAction)startBtn:(id)sender {
-    if([[(UIButton *)sender currentTitle]isEqualToString:@"START"]) {
+    if([[(UIButton *)sender currentTitle]isEqualToString:@"S T A R T"]) {
         
         // same codes are required when reset button was pressed and when the timer is initially started
+        
+        // THIS IS WHEN START BUTTON IS PRESSED WHILE RESET OR FIRST TIME PRESSING
         if (_resetPressed || !_firstStartBtnPressed) {
             _firstStartBtnPressed = true;
             _resetPressed = false;
@@ -155,7 +107,7 @@
             [_timer startTimer];
 
         }
-        
+        // THIS IS WHEN START BUTTON IS PRESSED WITHOUT RESET OR FIRST TIME PRESSING
         if (_stopPressed && !_resetPressed) {
             _stopPressed = false;
             [_timer resumeTimer];
@@ -163,25 +115,33 @@
             // resetBtn disappeared
             [_resetBtn setEnabled:NO];
             [_resetBtn setTitle:@"" forState:UIControlStateNormal];
+            
+            [_saveBtn setEnabled: NO];
+            [_saveBtn setTitle:@"" forState:UIControlStateNormal];
+
         }
         
         // change the button text to STOP
-        [sender setTitle:@"STOP" forState:UIControlStateNormal];
+        [sender setTitle:@"S T O P" forState:UIControlStateNormal];
         
         
     }
     
-    else if([[(UIButton *)sender currentTitle]isEqualToString:@"STOP"]){
+    // THIS IS WHEN STOP BUTTON IS PRESSED
+    else if([[(UIButton *)sender currentTitle]isEqualToString:@"S T O P"]){
         _stopPressed = true;
         
         [_timer pauseTimer];
         
         // resetBtn appear
         [_resetBtn setEnabled:YES];
-        [_resetBtn setTitle:@"RESET" forState:UIControlStateNormal];
+        [_resetBtn setTitle:@"R E S E T" forState:UIControlStateNormal];
+
+        [_saveBtn setEnabled:YES];
+        [_saveBtn setTitle:@"S A V E" forState:UIControlStateNormal];
 
         // change the button text to START
-        [sender setTitle:@"START" forState:UIControlStateNormal];
+        [sender setTitle:@"S T A R T" forState:UIControlStateNormal];
     }
 }
 
@@ -194,6 +154,9 @@
     // resetBtn disappeared
     [_resetBtn setEnabled:NO];
     [_resetBtn setTitle:@"" forState:UIControlStateNormal];
+    
+    [_saveBtn setEnabled: NO];
+    [_saveBtn setTitle:@"" forState:UIControlStateNormal];
 }
 
 - (IBAction)categorySelectBtn:(id)sender {
@@ -210,6 +173,17 @@
     [_categoryLbl setAlpha:1];
     _categoryLbl.text = selectedCategory;
     
+}
+
+- (IBAction)saveBt:(id)sender {
+    NSLog(@"save button clicked!");
+
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"EffView"];
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:vc animated:YES completion:NULL];
+    
+    NSLog(@"save button process complete!");
 }
 
 /*
