@@ -13,6 +13,7 @@
 		07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E14DB61E136E11002A6ED0 /* TimerViewController.m */; };
 		836E08D91E175F0D00B3FEA5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 836E08D81E175F0D00B3FEA5 /* DBManager.m */; };
 		836E08DC1E176D5D00B3FEA5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 836E08DB1E176D5D00B3FEA5 /* libsqlite3.tbd */; };
+		8385BE0F1E25B6770081A8C3 /* EFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8385BE0E1E25B6770081A8C3 /* EFCircularSlider.m */; };
 		83D84E981E136BB100FF2B04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E971E136BB100FF2B04 /* main.m */; };
 		83D84E9B1E136BB100FF2B04 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E9A1E136BB100FF2B04 /* AppDelegate.m */; };
 		83D84EA11E136BB100FF2B04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D84E9F1E136BB100FF2B04 /* Main.storyboard */; };
@@ -32,6 +33,8 @@
 		836E08D71E175F0D00B3FEA5 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		836E08D81E175F0D00B3FEA5 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		836E08DB1E176D5D00B3FEA5 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		8385BE0D1E25B6770081A8C3 /* EFCircularSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFCircularSlider.h; sourceTree = "<group>"; };
+		8385BE0E1E25B6770081A8C3 /* EFCircularSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFCircularSlider.m; sourceTree = "<group>"; };
 		83D84E931E136BB100FF2B04 /* LifeTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D84E971E136BB100FF2B04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83D84E991E136BB100FF2B04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -62,6 +65,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8385BE0C1E25B6770081A8C3 /* EFCircularSlider */ = {
+			isa = PBXGroup;
+			children = (
+				8385BE0D1E25B6770081A8C3 /* EFCircularSlider.h */,
+				8385BE0E1E25B6770081A8C3 /* EFCircularSlider.m */,
+			);
+			path = EFCircularSlider;
+			sourceTree = "<group>";
+		};
+		8385BE101E25B70D0081A8C3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				07E14DB51E136E11002A6ED0 /* TimerViewController.h */,
+				07E14DB61E136E11002A6ED0 /* TimerViewController.m */,
+				07A872411E25A8D3000FE0F3 /* EffViewController.h */,
+				07A872421E25A8D3000FE0F3 /* EffViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		83D84E8A1E136BB100FF2B04 = {
 			isa = PBXGroup;
 			children = (
@@ -82,12 +105,12 @@
 		83D84E951E136BB100FF2B04 /* LifeTime */ = {
 			isa = PBXGroup;
 			children = (
+				8385BE0C1E25B6770081A8C3 /* EFCircularSlider */,
 				07ADCFAA1E1C75F600EA7BA9 /* Activity.h */,
 				07ADCFAB1E1C75F600EA7BA9 /* Activity.m */,
 				83D84E991E136BB100FF2B04 /* AppDelegate.h */,
 				83D84E9A1E136BB100FF2B04 /* AppDelegate.m */,
-				07E14DB51E136E11002A6ED0 /* TimerViewController.h */,
-				07E14DB61E136E11002A6ED0 /* TimerViewController.m */,
+				8385BE101E25B70D0081A8C3 /* ViewControllers */,
 				836E08D71E175F0D00B3FEA5 /* DBManager.h */,
 				836E08D81E175F0D00B3FEA5 /* DBManager.m */,
 				83D84E9F1E136BB100FF2B04 /* Main.storyboard */,
@@ -97,8 +120,6 @@
 				83D84E961E136BB100FF2B04 /* Supporting Files */,
 				076F3DB11E17771E006999E9 /* Timer.h */,
 				076F3DB21E17771E006999E9 /* Timer.m */,
-				07A872411E25A8D3000FE0F3 /* EffViewController.h */,
-				07A872421E25A8D3000FE0F3 /* EffViewController.m */,
 			);
 			path = LifeTime;
 			sourceTree = "<group>";
@@ -182,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8385BE0F1E25B6770081A8C3 /* EFCircularSlider.m in Sources */,
 				076F3DB31E17771E006999E9 /* Timer.m in Sources */,
 				07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */,
 				83D84E9B1E136BB100FF2B04 /* AppDelegate.m in Sources */,

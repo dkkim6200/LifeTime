@@ -19,6 +19,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *categoryLbl;
 
-@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+@property (weak, nonatomic) IBOutlet UIButton *finishBtn;
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -65,8 +65,7 @@
                                 <rect key="frame" x="237" y="602" width="114" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="saveBt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R4g-dV-M09"/>
-                                    <segue destination="SKc-G1-XQA" kind="presentation" id="8RV-Jq-Efe"/>
+                                    <action selector="finishBt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CgJ-Ev-APc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNa-wn-Ecx">
@@ -88,8 +87,8 @@
                     <connections>
                         <outlet property="categoryLbl" destination="rWI-gm-3c2" id="Qqq-Ml-De5"/>
                         <outlet property="categoryPicker" destination="W3j-mp-Xnm" id="j4I-CG-k7z"/>
+                        <outlet property="finishBtn" destination="VUe-Uy-IHG" id="6z8-Yi-8hJ"/>
                         <outlet property="resetBtn" destination="VNa-wn-Ecx" id="hb0-xf-DS4"/>
-                        <outlet property="saveBtn" destination="VUe-Uy-IHG" id="T7A-ZZ-pOE"/>
                         <outlet property="startBtn" destination="FsA-ep-4Pj" id="4T2-c1-OpA"/>
                         <outlet property="timerLbl" destination="HT0-sA-EvB" id="fQS-iy-jvW"/>
                     </connections>
@@ -117,9 +116,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OBW-oX-ZvR">
+                                <rect key="frame" x="107" y="302" width="161" height="63"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="52"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWM-gK-bKo">
+                                <rect key="frame" x="114" y="587" width="147" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                <state key="normal" title="S A V E"/>
+                                <connections>
+                                    <action selector="saveBtnPressed:" destination="SKc-G1-XQA" eventType="touchUpInside" id="Glc-0D-fGw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="percentageLabel" destination="OBW-oX-ZvR" id="oSi-go-jRc"/>
+                        <outlet property="saveBtn" destination="vWM-gK-bKo" id="HMH-1h-Ni7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tdx-pI-WRf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

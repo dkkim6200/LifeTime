@@ -116,8 +116,8 @@
             [_resetBtn setEnabled:NO];
             [_resetBtn setTitle:@"" forState:UIControlStateNormal];
             
-            [_saveBtn setEnabled: NO];
-            [_saveBtn setTitle:@"" forState:UIControlStateNormal];
+            [_finishBtn setEnabled: NO];
+            [_finishBtn setTitle:@"" forState:UIControlStateNormal];
 
         }
         
@@ -137,8 +137,8 @@
         [_resetBtn setEnabled:YES];
         [_resetBtn setTitle:@"R E S E T" forState:UIControlStateNormal];
 
-        [_saveBtn setEnabled:YES];
-        [_saveBtn setTitle:@"S A V E" forState:UIControlStateNormal];
+        [_finishBtn setEnabled:YES];
+        [_finishBtn setTitle:@"F I N I S H" forState:UIControlStateNormal];
 
         // change the button text to START
         [sender setTitle:@"S T A R T" forState:UIControlStateNormal];
@@ -155,8 +155,8 @@
     [_resetBtn setEnabled:NO];
     [_resetBtn setTitle:@"" forState:UIControlStateNormal];
     
-    [_saveBtn setEnabled: NO];
-    [_saveBtn setTitle:@"" forState:UIControlStateNormal];
+    [_finishBtn setEnabled: NO];
+    [_finishBtn setTitle:@"" forState:UIControlStateNormal];
 }
 
 - (IBAction)categorySelectBtn:(id)sender {
@@ -175,15 +175,17 @@
     
 }
 
-- (IBAction)saveBt:(id)sender {
-    NSLog(@"save button clicked!");
+- (IBAction)finishBt:(id)sender {
+    NSLog(@"finish button clicked!");
+    
+    [self resetBtn:NULL];
 
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"EffView"];
-    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:vc animated:YES completion:NULL];
     
-    NSLog(@"save button process complete!");
+    NSLog(@"finish button process complete!");
 }
 
 /*

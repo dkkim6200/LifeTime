@@ -10,4 +10,7 @@
 
 @interface EffViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *percentageLabel;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+
 @end
