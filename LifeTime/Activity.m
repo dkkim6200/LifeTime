@@ -26,5 +26,10 @@
     _category = category;
 }
 
+-(void)setDesc:(NSString*) desc {
+    _desc = desc;
+}
+
+
 
 @end

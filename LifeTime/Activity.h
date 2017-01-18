@@ -11,5 +11,6 @@
 @interface Activity : NSObject
 
 -(void)setCategory:(NSString*) category;
+-(void)setDesc:(NSString*) desc;
 
 @end

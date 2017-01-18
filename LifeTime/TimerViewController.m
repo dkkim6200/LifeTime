@@ -19,6 +19,8 @@
 
 @property NSArray *activityCategories;
 
+@property (weak, nonatomic) IBOutlet UITextField *descTxtField;
+
 //----------------------------------------------------------------------
 // timer related
 //----------------------------------------------------------------------
@@ -94,54 +96,64 @@
 }
 
 - (IBAction)startBtn:(id)sender {
-    if([[(UIButton *)sender currentTitle]isEqualToString:@"S T A R T"]) {
-        
-        // same codes are required when reset button was pressed and when the timer is initially started
-        
-        // THIS IS WHEN START BUTTON IS PRESSED WHILE RESET OR FIRST TIME PRESSING
-        if (_resetPressed || !_firstStartBtnPressed) {
-            _firstStartBtnPressed = true;
-            _resetPressed = false;
-            _stopPressed = false;
-            [_timer resetTimer];
-            [_timer startTimer];
+    NSLog(@"categoryLbl.text length %lu",[_categoryLbl.text length]);
+    NSLog(@"_descLbl.text length %lu",[_descLbl.text length]);
 
-        }
-        // THIS IS WHEN START BUTTON IS PRESSED WITHOUT RESET OR FIRST TIME PRESSING
-        if (_stopPressed && !_resetPressed) {
-            _stopPressed = false;
-            [_timer resumeTimer];
+    if ([_categoryLbl.text length] != 0 && [_descLbl.text length] != 0) {
+        if([[(UIButton *)sender currentTitle]isEqualToString:@"S T A R T"]) {
             
-            // resetBtn disappeared
-            [_resetBtn setEnabled:NO];
-            [_resetBtn setTitle:@"" forState:UIControlStateNormal];
+            // same codes are required when reset button was pressed and when the timer is initially started
             
-            [_finishBtn setEnabled: NO];
-            [_finishBtn setTitle:@"" forState:UIControlStateNormal];
-
+            // THIS IS WHEN START BUTTON IS PRESSED WHILE RESET OR FIRST TIME STARTING THE TIMER
+            if (_resetPressed || !_firstStartBtnPressed) {
+                _firstStartBtnPressed = true;
+                _resetPressed = false;
+                _stopPressed = false;
+                [_timer resetTimer];
+                [_timer startTimer];
+                
+            }
+            // THIS IS WHEN START BUTTON IS PRESSED WITHOUT RESET OR WHEN IT'S NOT FIRST TIME STARTING
+            if (_stopPressed && !_resetPressed) {
+                _stopPressed = false;
+                [_timer resumeTimer];
+                
+                // resetBtn disappeared
+                [_resetBtn setEnabled:NO];
+                [_resetBtn setTitle:@"" forState:UIControlStateNormal];
+                
+                [_finishBtn setEnabled: NO];
+                [_finishBtn setTitle:@"" forState:UIControlStateNormal];
+                
+                [_descTxtField setEnabled:true];
+                
+                
+            }
+            
+            // change the button text to STOP
+            [sender setTitle:@"S T O P" forState:UIControlStateNormal];
         }
         
-        // change the button text to STOP
-        [sender setTitle:@"S T O P" forState:UIControlStateNormal];
-        
-        
+        // THIS IS WHEN STOP BUTTON IS PRESSED
+        else if([[(UIButton *)sender currentTitle]isEqualToString:@"S T O P"]){
+            _stopPressed = true;
+            
+            [_timer pauseTimer];
+            
+            // resetBtn appear
+            [_resetBtn setEnabled:YES];
+            [_resetBtn setTitle:@"R E S E T" forState:UIControlStateNormal];
+            
+            [_finishBtn setEnabled:YES];
+            [_finishBtn setTitle:@"F I N I S H" forState:UIControlStateNormal];
+            
+            // change the button text to START
+            [sender setTitle:@"S T A R T" forState:UIControlStateNormal];
+        }
     }
-    
-    // THIS IS WHEN STOP BUTTON IS PRESSED
-    else if([[(UIButton *)sender currentTitle]isEqualToString:@"S T O P"]){
-        _stopPressed = true;
-        
-        [_timer pauseTimer];
-        
-        // resetBtn appear
-        [_resetBtn setEnabled:YES];
-        [_resetBtn setTitle:@"R E S E T" forState:UIControlStateNormal];
-
-        [_finishBtn setEnabled:YES];
-        [_finishBtn setTitle:@"F I N I S H" forState:UIControlStateNormal];
-
-        // change the button text to START
-        [sender setTitle:@"S T A R T" forState:UIControlStateNormal];
+    else {
+        NSLog(@"Must fill the category or the description to start timer!!");
+        return;
     }
 }
 
@@ -157,22 +169,41 @@
     
     [_finishBtn setEnabled: NO];
     [_finishBtn setTitle:@"" forState:UIControlStateNormal];
+    
+    
+    // emptying the category Lable and the description field
+    _categoryLbl.text = @"";
+    _descTxtField.text = @"";
+    _descLbl.text = @"";
+    
+    // make everything visible
+    
+    [_categoryPicker reloadAllComponents];
+    [_categoryPicker selectRow:0 inComponent:0 animated:YES];
+    [_categoryPicker setAlpha:1];
+    
+    [_categorySelectBtn setAlpha:1];
+    [_descSelectBtn setAlpha:1];
+    [_descTxtField setAlpha:1];
 }
 
 - (IBAction)categorySelectBtn:(id)sender {
+    
     int row;
     row = [_categoryPicker selectedRowInComponent:0];
     NSString *selectedCategory = [_activityCategories objectAtIndex:row];
     [_activity setCategory: selectedCategory];
-    
     NSLog (@"selected activity: %@", selectedCategory);
     
-//    [_activityCategoryPicker setUserInteractionEnabled:false];
     [_categoryPicker setAlpha:0]; // if ok button is pressed, picker "dissappears" = transparent
     [_categoryLbl setEnabled:true];
     [_categoryLbl setAlpha:1];
     _categoryLbl.text = selectedCategory;
     
+    NSLog(@"_categoryLbl.text length %lu",[_categoryLbl.text length]);
+    if ([_categoryLbl.text length] != 0) {
+        [_categorySelectBtn setAlpha:0];
+    }
 }
 
 - (IBAction)finishBt:(id)sender {
@@ -187,7 +218,27 @@
     
     NSLog(@"finish button process complete!");
 }
+- (IBAction)descBtn:(id)sender {
+    NSLog(@"desc ok button clicked!");
+    if ([_descTxtField.text length] != 0) {
+        [_descSelectBtn setAlpha:0];
+    }
 
+    if ([_descTxtField.text length] != 0) {
+        NSString *desc = _descTxtField.text;
+        NSLog(@"description: %@", desc);
+        
+        [_activity setDesc: desc];
+        
+        [_descLbl setEnabled:true];
+        [_descLbl setAlpha:1];
+        _descLbl.text = desc;
+        
+        [_descTxtField setAlpha:0];
+        
+        NSLog(@"desc ok process complete!");
+    }
+   }
 /*
 #pragma mark - Navigation
 
