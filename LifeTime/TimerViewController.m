@@ -62,6 +62,8 @@
                                                                    repeats:YES];
     
     _activity = [[Activity alloc] init];
+    
+    _descTxtField.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,9 +99,9 @@
 
 - (IBAction)startBtn:(id)sender {
     NSLog(@"categoryLbl.text length %lu",[_categoryLbl.text length]);
-    NSLog(@"_descLbl.text length %lu",[_descLbl.text length]);
+    NSLog(@"_descTxtField.text length %lu",[_descTxtField.text length]);
 
-    if ([_categoryLbl.text length] != 0 && [_descLbl.text length] != 0) {
+    if ([_categoryLbl.text length] != 0 && [_descTxtField.text length] != 0) {
         if([[(UIButton *)sender currentTitle]isEqualToString:@"S T A R T"]) {
             
             // same codes are required when reset button was pressed and when the timer is initially started
@@ -174,7 +176,6 @@
     // emptying the category Lable and the description field
     _categoryLbl.text = @"";
     _descTxtField.text = @"";
-    _descLbl.text = @"";
     
     // make everything visible
     
@@ -183,7 +184,6 @@
     [_categoryPicker setAlpha:1];
     
     [_categorySelectBtn setAlpha:1];
-    [_descSelectBtn setAlpha:1];
     [_descTxtField setAlpha:1];
 }
 
@@ -218,27 +218,26 @@
     
     NSLog(@"finish button process complete!");
 }
-- (IBAction)descBtn:(id)sender {
-    NSLog(@"desc ok button clicked!");
-    if ([_descTxtField.text length] != 0) {
-        [_descSelectBtn setAlpha:0];
-    }
 
-    if ([_descTxtField.text length] != 0) {
-        NSString *desc = _descTxtField.text;
-        NSLog(@"description: %@", desc);
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if ([textField.accessibilityLabel isEqual: @"Desc"]) {
+        NSLog(@"desc done button clicked!");
         
-        [_activity setDesc: desc];
-        
-        [_descLbl setEnabled:true];
-        [_descLbl setAlpha:1];
-        _descLbl.text = desc;
-        
-        [_descTxtField setAlpha:0];
-        
-        NSLog(@"desc ok process complete!");
+        if ([_descTxtField.text length] != 0) {
+            NSString *desc = _descTxtField.text;
+            NSLog(@"description: %@", desc);
+            
+            [_activity setDesc: desc];
+//            [_descTxtField setAlpha:0];
+            
+            NSLog(@"desc done process complete!");
+        }
     }
-   }
+    
+    [textField resignFirstResponder];
+    return YES;
+}
+
 /*
 #pragma mark - Navigation
 

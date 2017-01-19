@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TimerViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
+@interface TimerViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIPickerView *categoryPicker;
 
@@ -22,9 +22,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *categorySelectBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *finishBtn;
-
-@property (weak, nonatomic) IBOutlet UILabel *descLbl;
-
-@property (weak, nonatomic) IBOutlet UIButton *descSelectBtn;
 
 @end
