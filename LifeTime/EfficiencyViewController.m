@@ -6,14 +6,14 @@
 //  Copyright © 2017 DaekunKim. All rights reserved.
 //
 
-#import "EffViewController.h"
+#import "EfficiencyViewController.h"
 #import "EFCircularSlider.h"
 
-@interface EffViewController ()
+@interface EfficiencyViewController ()
 
 @end
 
-@implementation EffViewController
+@implementation EfficiencyViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EffViewController : UIViewController
+@interface EfficiencyViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *percentageLabel;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;

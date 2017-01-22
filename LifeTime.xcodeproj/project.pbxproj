@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		076F3DB31E17771E006999E9 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 076F3DB21E17771E006999E9 /* Timer.m */; };
-		07A872431E25A8D3000FE0F3 /* EffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A872421E25A8D3000FE0F3 /* EffViewController.m */; };
+		07A872431E25A8D3000FE0F3 /* EfficiencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A872421E25A8D3000FE0F3 /* EfficiencyViewController.m */; };
 		07ADCFAC1E1C75F600EA7BA9 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ADCFAB1E1C75F600EA7BA9 /* Activity.m */; };
 		07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E14DB61E136E11002A6ED0 /* TimerViewController.m */; };
 		836E08D91E175F0D00B3FEA5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 836E08D81E175F0D00B3FEA5 /* DBManager.m */; };
@@ -24,8 +24,8 @@
 /* Begin PBXFileReference section */
 		076F3DB11E17771E006999E9 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		076F3DB21E17771E006999E9 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
-		07A872411E25A8D3000FE0F3 /* EffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffViewController.h; sourceTree = "<group>"; };
-		07A872421E25A8D3000FE0F3 /* EffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffViewController.m; sourceTree = "<group>"; };
+		07A872411E25A8D3000FE0F3 /* EfficiencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EfficiencyViewController.h; sourceTree = "<group>"; };
+		07A872421E25A8D3000FE0F3 /* EfficiencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EfficiencyViewController.m; sourceTree = "<group>"; };
 		07ADCFAA1E1C75F600EA7BA9 /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		07ADCFAB1E1C75F600EA7BA9 /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
 		07E14DB51E136E11002A6ED0 /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
@@ -79,8 +79,8 @@
 			children = (
 				07E14DB51E136E11002A6ED0 /* TimerViewController.h */,
 				07E14DB61E136E11002A6ED0 /* TimerViewController.m */,
-				07A872411E25A8D3000FE0F3 /* EffViewController.h */,
-				07A872421E25A8D3000FE0F3 /* EffViewController.m */,
+				07A872411E25A8D3000FE0F3 /* EfficiencyViewController.h */,
+				07A872421E25A8D3000FE0F3 /* EfficiencyViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -106,20 +106,20 @@
 			isa = PBXGroup;
 			children = (
 				8385BE0C1E25B6770081A8C3 /* EFCircularSlider */,
-				07ADCFAA1E1C75F600EA7BA9 /* Activity.h */,
-				07ADCFAB1E1C75F600EA7BA9 /* Activity.m */,
 				83D84E991E136BB100FF2B04 /* AppDelegate.h */,
 				83D84E9A1E136BB100FF2B04 /* AppDelegate.m */,
 				8385BE101E25B70D0081A8C3 /* ViewControllers */,
 				836E08D71E175F0D00B3FEA5 /* DBManager.h */,
 				836E08D81E175F0D00B3FEA5 /* DBManager.m */,
+				07ADCFAA1E1C75F600EA7BA9 /* Activity.h */,
+				07ADCFAB1E1C75F600EA7BA9 /* Activity.m */,
+				076F3DB11E17771E006999E9 /* Timer.h */,
+				076F3DB21E17771E006999E9 /* Timer.m */,
 				83D84E9F1E136BB100FF2B04 /* Main.storyboard */,
 				83D84EA21E136BB100FF2B04 /* Assets.xcassets */,
 				83D84EA41E136BB100FF2B04 /* LaunchScreen.storyboard */,
 				83D84EA71E136BB100FF2B04 /* Info.plist */,
 				83D84E961E136BB100FF2B04 /* Supporting Files */,
-				076F3DB11E17771E006999E9 /* Timer.h */,
-				076F3DB21E17771E006999E9 /* Timer.m */,
 			);
 			path = LifeTime;
 			sourceTree = "<group>";
@@ -210,7 +210,7 @@
 				83D84E981E136BB100FF2B04 /* main.m in Sources */,
 				07ADCFAC1E1C75F600EA7BA9 /* Activity.m in Sources */,
 				836E08D91E175F0D00B3FEA5 /* DBManager.m in Sources */,
-				07A872431E25A8D3000FE0F3 /* EffViewController.m in Sources */,
+				07A872431E25A8D3000FE0F3 /* EfficiencyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

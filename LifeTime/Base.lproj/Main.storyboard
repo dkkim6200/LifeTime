@@ -32,9 +32,15 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="categorySelectBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NY1-rJ-HBM"/>
+                                    <action selector="categorySelectButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Mr-gc-4z7"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWI-gm-3c2">
+                                <rect key="frame" x="63" y="0.0" width="250" height="157"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="53"/>
+                                <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Describe the event..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LXO-Db-ieq">
                                 <rect key="frame" x="16" y="157" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -58,65 +64,45 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="43"/>
                                 <state key="normal" title="S T A R T"/>
                                 <connections>
-                                    <action selector="startBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BhO-Ke-zau"/>
+                                    <action selector="startButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hKG-E2-xoN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNa-wn-Ecx">
                                 <rect key="frame" x="0.0" y="583" width="211" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="resetBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fBv-Fa-EpF"/>
+                                    <action selector="resetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vEH-dI-Li2"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWI-gm-3c2">
-                                <rect key="frame" x="63" y="0.0" width="250" height="157"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="53"/>
-                                <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VUe-Uy-IHG">
                                 <rect key="frame" x="237" y="592" width="114" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="finishBt:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CgJ-Ev-APc"/>
+                                    <action selector="finishButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JQA-q0-eWR"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qxi-eb-rt9">
-                                <rect key="frame" x="143" y="195" width="0.0" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9a-LY-pzL">
-                                <rect key="frame" x="143" y="195" width="5" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <outlet property="categoryLbl" destination="rWI-gm-3c2" id="Qqq-Ml-De5"/>
+                        <outlet property="categoryLabel" destination="rWI-gm-3c2" id="Ozl-Pu-R3a"/>
                         <outlet property="categoryPicker" destination="W3j-mp-Xnm" id="j4I-CG-k7z"/>
-                        <outlet property="categorySelectBtn" destination="jbP-4m-HXF" id="F86-tr-y3r"/>
-                        <outlet property="descTxtField" destination="LXO-Db-ieq" id="1VI-A2-dEa"/>
-                        <outlet property="finishBtn" destination="VUe-Uy-IHG" id="6z8-Yi-8hJ"/>
-                        <outlet property="resetBtn" destination="VNa-wn-Ecx" id="hb0-xf-DS4"/>
-                        <outlet property="startBtn" destination="FsA-ep-4Pj" id="4T2-c1-OpA"/>
-                        <outlet property="timerLbl" destination="HT0-sA-EvB" id="fQS-iy-jvW"/>
+                        <outlet property="categorySelectButton" destination="jbP-4m-HXF" id="blY-uK-NLO"/>
+                        <outlet property="descriptionTextField" destination="LXO-Db-ieq" id="EiF-ts-Aag"/>
+                        <outlet property="finishButton" destination="VUe-Uy-IHG" id="LPI-jB-ZWR"/>
+                        <outlet property="resetButton" destination="VNa-wn-Ecx" id="EJh-Z3-0br"/>
+                        <outlet property="startButton" destination="FsA-ep-4Pj" id="VHE-BE-Op0"/>
+                        <outlet property="timerLabel" destination="HT0-sA-EvB" id="Xl7-vo-MtU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="135.19999999999999" y="107.49625187406298"/>
         </scene>
-        <!--Eff View Controller-->
+        <!--Efficiency View Controller-->
         <scene sceneID="fUZ-AE-rv5">
             <objects>
-                <viewController storyboardIdentifier="EffView" id="SKc-G1-XQA" customClass="EffViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EfficiencyView" id="SKc-G1-XQA" customClass="EfficiencyViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nsm-Cd-Mbb"/>
                         <viewControllerLayoutGuide type="bottom" id="f6T-Dp-9Rj"/>

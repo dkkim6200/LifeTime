@@ -13,19 +13,16 @@
 @interface TimerViewController ()
 
 @property (strong, nonatomic) Timer *timer; // Store the timer that fires after a certain time
-@property (strong, nonatomic) NSTimer *painter; // updates the timer with the time received from Timer.m
-
-@property (strong, nonatomic) Activity *activity;
+@property (strong, nonatomic) NSTimer *painter; // updates the timer with the time received from TimerViewController::timer
 
 @property NSArray *activityCategories;
-
-@property (weak, nonatomic) IBOutlet UITextField *descTxtField;
+@property (strong, nonatomic) Activity *activity;
 
 //----------------------------------------------------------------------
 // timer related
 //----------------------------------------------------------------------
 @property BOOL resetPressed;
-@property BOOL firstStartBtnPressed;
+@property BOOL firstStartButtonPressed;
 @property BOOL stopPressed;
 
 @end
@@ -34,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _firstStartBtnPressed = false;
+    _firstStartButtonPressed = false;
     _resetPressed = false;
     _stopPressed = false;
     _timer = [[Timer alloc] init];
@@ -54,7 +51,7 @@
     _categoryPicker.dataSource = self;
     _categoryPicker.delegate = self;
     
-    [_startBtn addTarget:self action:@selector(startBtn) forControlEvents:UIControlEventTouchUpInside];
+    [_startButton addTarget:self action:@selector(startButton) forControlEvents:UIControlEventTouchUpInside];
     
     _painter = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0 target:self
                                                                     selector:@selector(paintTimer)
@@ -63,7 +60,7 @@
     
     _activity = [[Activity alloc] init];
     
-    _descTxtField.delegate = self;
+    _descriptionTextField.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,23 +89,42 @@
     [dateFormatter setDateFormat:@"mm:ss"]; // minute과 second로 이루어져있음
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
     
-    // Format the elapsed time and set it to the timerLbl
+    // Format the elapsed time and set it to the timerLable
     NSString *timeString = [dateFormatter stringFromDate:currentTime];
-    _timerLbl.text = timeString;
+    _timerLabel.text = timeString;
 }
 
-- (IBAction)startBtn:(id)sender {
-    NSLog(@"categoryLbl.text length %lu",[_categoryLbl.text length]);
-    NSLog(@"_descTxtField.text length %lu",[_descTxtField.text length]);
+- (IBAction)categorySelectButton:(id)sender {
+    
+    int row;
+    row = [_categoryPicker selectedRowInComponent:0];
+    NSString *selectedCategory = [_activityCategories objectAtIndex:row];
+    [_activity setCategory: selectedCategory];
+    NSLog (@"selected activity: %@", selectedCategory);
+    
+    [_categoryPicker setAlpha:0]; // if ok button is pressed, picker "dissappears" = transparent
+    [_categoryLabel setEnabled:true];
+    [_categoryLabel setAlpha:1];
+    _categoryLabel.text = selectedCategory;
+    
+    NSLog(@"_categoryLabel.text length %lu",[_categoryLabel.text length]);
+    if ([_categoryLabel.text length] != 0) {
+        [_categorySelectButton setAlpha:0];
+    }
+}
 
-    if ([_categoryLbl.text length] != 0 && [_descTxtField.text length] != 0) {
+- (IBAction)startButton:(id)sender {
+    NSLog(@"categoryLabel.text length %lu",[_categoryLabel.text length]);
+    NSLog(@"_descriptionTextField.text length %lu",[_descriptionTextField.text length]);
+
+    if ([_categoryLabel.text length] != 0 && [_descriptionTextField.text length] != 0) {
         if([[(UIButton *)sender currentTitle]isEqualToString:@"S T A R T"]) {
             
             // same codes are required when reset button was pressed and when the timer is initially started
             
             // THIS IS WHEN START BUTTON IS PRESSED WHILE RESET OR FIRST TIME STARTING THE TIMER
-            if (_resetPressed || !_firstStartBtnPressed) {
-                _firstStartBtnPressed = true;
+            if (_resetPressed || !_firstStartButtonPressed) {
+                _firstStartButtonPressed = true;
                 _resetPressed = false;
                 _stopPressed = false;
                 [_timer resetTimer];
@@ -120,14 +136,14 @@
                 _stopPressed = false;
                 [_timer resumeTimer];
                 
-                // resetBtn disappeared
-                [_resetBtn setEnabled:NO];
-                [_resetBtn setTitle:@"" forState:UIControlStateNormal];
+                // resetButton disappeared
+                [_resetButton setEnabled:NO];
+                [_resetButton setTitle:@"" forState:UIControlStateNormal];
                 
-                [_finishBtn setEnabled: NO];
-                [_finishBtn setTitle:@"" forState:UIControlStateNormal];
+                [_finishButton setEnabled: NO];
+                [_finishButton setTitle:@"" forState:UIControlStateNormal];
                 
-                [_descTxtField setEnabled:true];
+                [_descriptionTextField setEnabled:true];
                 
                 
             }
@@ -142,12 +158,12 @@
             
             [_timer pauseTimer];
             
-            // resetBtn appear
-            [_resetBtn setEnabled:YES];
-            [_resetBtn setTitle:@"R E S E T" forState:UIControlStateNormal];
+            // resetButton appear
+            [_resetButton setEnabled:YES];
+            [_resetButton setTitle:@"R E S E T" forState:UIControlStateNormal];
             
-            [_finishBtn setEnabled:YES];
-            [_finishBtn setTitle:@"F I N I S H" forState:UIControlStateNormal];
+            [_finishButton setEnabled:YES];
+            [_finishButton setTitle:@"F I N I S H" forState:UIControlStateNormal];
             
             // change the button text to START
             [sender setTitle:@"S T A R T" forState:UIControlStateNormal];
@@ -159,23 +175,23 @@
     }
 }
 
-- (IBAction)resetBtn:(id)sender {
+- (IBAction)resetButton:(id)sender {
     _resetPressed = true;
     [_timer resetTimer]; // redundant??????????????????????????????????????????????????????????????????????
-//    _timerLbl.text = @"00:00";
+//    _timerLabel.text = @"00:00";
     
     
-    // resetBtn disappeared
-    [_resetBtn setEnabled:NO];
-    [_resetBtn setTitle:@"" forState:UIControlStateNormal];
+    // resetButton disappeared
+    [_resetButton setEnabled:NO];
+    [_resetButton setTitle:@"" forState:UIControlStateNormal];
     
-    [_finishBtn setEnabled: NO];
-    [_finishBtn setTitle:@"" forState:UIControlStateNormal];
+    [_finishButton setEnabled: NO];
+    [_finishButton setTitle:@"" forState:UIControlStateNormal];
     
     
     // emptying the category Lable and the description field
-    _categoryLbl.text = @"";
-    _descTxtField.text = @"";
+    _categoryLabel.text = @"";
+    _descriptionTextField.text = @"";
     
     // make everything visible
     
@@ -183,36 +199,17 @@
     [_categoryPicker selectRow:0 inComponent:0 animated:YES];
     [_categoryPicker setAlpha:1];
     
-    [_categorySelectBtn setAlpha:1];
-    [_descTxtField setAlpha:1];
+    [_categorySelectButton setAlpha:1];
+    [_descriptionTextField setAlpha:1];
 }
 
-- (IBAction)categorySelectBtn:(id)sender {
-    
-    int row;
-    row = [_categoryPicker selectedRowInComponent:0];
-    NSString *selectedCategory = [_activityCategories objectAtIndex:row];
-    [_activity setCategory: selectedCategory];
-    NSLog (@"selected activity: %@", selectedCategory);
-    
-    [_categoryPicker setAlpha:0]; // if ok button is pressed, picker "dissappears" = transparent
-    [_categoryLbl setEnabled:true];
-    [_categoryLbl setAlpha:1];
-    _categoryLbl.text = selectedCategory;
-    
-    NSLog(@"_categoryLbl.text length %lu",[_categoryLbl.text length]);
-    if ([_categoryLbl.text length] != 0) {
-        [_categorySelectBtn setAlpha:0];
-    }
-}
-
-- (IBAction)finishBt:(id)sender {
+- (IBAction)finishButton:(id)sender {
     NSLog(@"finish button clicked!");
     
-    [self resetBtn:NULL];
+    [self resetButton:NULL];
 
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"EffView"];
+    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"EfficiencyView"];
     vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:vc animated:YES completion:NULL];
     
@@ -221,16 +218,16 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if ([textField.accessibilityLabel isEqual: @"Desc"]) {
-        NSLog(@"desc done button clicked!");
+        NSLog(@"description done button clicked!");
         
-        if ([_descTxtField.text length] != 0) {
-            NSString *desc = _descTxtField.text;
-            NSLog(@"description: %@", desc);
+        if ([_descriptionTextField.text length] != 0) {
+            NSString *description = _descriptionTextField.text;
+            NSLog(@"description: %@", description);
             
-            [_activity setDesc: desc];
+            [_activity setDesc: description];
 //            [_descTxtField setAlpha:0];
             
-            NSLog(@"desc done process complete!");
+            NSLog(@"description done process complete!");
         }
     }
     
