@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Activity.h"
 
 @interface EfficiencyViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *percentageLabel;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+
+@property (strong, nonatomic) NSString *category;
+@property (strong, nonatomic) NSString *description;
+
+@property NSTimeInterval duration;
+
+@property (strong, nonatomic) NSString *efficiency;
 
 @end

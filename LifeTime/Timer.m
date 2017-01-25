@@ -9,15 +9,17 @@
 #import "Timer.h"
 
 @implementation Timer {
+    NSTimeInterval timeInterval;
+
     NSTimeInterval pauseResumeInterval;
-    NSDate *timerDate, *pausedTime, *resumedTime, *initialStartTime;
+    
+    NSDate *pausedTime, *resumedTime, *initialStartTime;
 }
 
 -(id) init {
     self = [super init];
     
     if(self) {
-        timerDate = [NSDate dateWithTimeIntervalSince1970:0];
     }
     
     return self;
@@ -29,16 +31,14 @@
     NSDate *currentDate = [NSDate date];
     
     // Timer time = current time - intial time - pausedInterval
-    NSTimeInterval timeInterval =
+    timeInterval =
     [currentDate timeIntervalSinceDate:[initialStartTime dateByAddingTimeInterval: pauseResumeInterval]];
     //    NSLog(@"timeInterval: %f", timeInterval);
     
-    timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-
 }
 
--(NSDate *) getTime {
-    return timerDate;
+-(NSTimeInterval) getInterval {
+    return timeInterval;
 }
 
 -(void) pauseTimer {
@@ -64,8 +64,9 @@
 
 -(void) resetTimer {
     initialStartTime = [NSDate date];
+    timeInterval = 0;
     pauseResumeInterval = 0;
-    timerDate = [NSDate dateWithTimeIntervalSince1970:0];
+//    timerDate = [NSDate dateWithTimeIntervalSince1970:0];
 
     [self.timer invalidate];
     self.timer = nil;

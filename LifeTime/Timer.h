@@ -11,9 +11,8 @@
 @interface Timer : NSObject
 
 @property (strong, nonatomic) NSTimer *timer; // Store the timer that fires after a certain time
-@property BOOL temp;
 
--(NSDate *)getTime;
+-(NSTimeInterval) getInterval;
 
 -(void) pauseTimer;
 -(void) resumeTimer;

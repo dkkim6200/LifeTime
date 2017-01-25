@@ -9,6 +9,7 @@
 #import "Timer.h"
 #import "TimerViewController.h"
 #import "Activity.h"
+#import "EfficiencyViewController.h"
 
 @interface TimerViewController ()
 
@@ -16,7 +17,6 @@
 @property (strong, nonatomic) NSTimer *painter; // updates the timer with the time received from TimerViewController::timer
 
 @property NSArray *activityCategories;
-@property (strong, nonatomic) Activity *activity;
 
 //----------------------------------------------------------------------
 // timer related
@@ -58,8 +58,6 @@
                                                                   userInfo:nil
                                                                    repeats:YES];
     
-    _activity = [[Activity alloc] init];
-    
     _descriptionTextField.delegate = self;
 }
 
@@ -82,7 +80,7 @@
 }
 
 -(void) paintTimer {
-    NSDate *currentTime = [_timer getTime];
+    NSDate *currentTime = [NSDate dateWithTimeIntervalSince1970:[_timer getInterval]];
     
     // Create a date formatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -95,11 +93,8 @@
 }
 
 - (IBAction)categorySelectButton:(id)sender {
-    
-    int row;
-    row = [_categoryPicker selectedRowInComponent:0];
+    int row = [_categoryPicker selectedRowInComponent:0];
     NSString *selectedCategory = [_activityCategories objectAtIndex:row];
-    [_activity setCategory: selectedCategory];
     NSLog (@"selected activity: %@", selectedCategory);
     
     [_categoryPicker setAlpha:0]; // if ok button is pressed, picker "dissappears" = transparent
@@ -208,10 +203,19 @@
     
     [self resetButton:NULL];
 
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *vc = [sb instantiateViewControllerWithIdentifier:@"EfficiencyView"];
-    vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:vc animated:YES completion:NULL];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    EfficiencyViewController *efficiencyViewController = [storyboard instantiateViewControllerWithIdentifier:@"EfficiencyView"];
+    
+//    efficiencyViewController.category = _categoryLabel.text;
+//    efficiencyViewController.description = _descriptionTextField.text;
+//    
+//    efficiencyViewController.duration = [_timer getInterval];
+//    efficiencyViewController.description = _descriptionTextField.text;
+
+    
+    
+    efficiencyViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:efficiencyViewController animated:YES completion:NULL];
     
     NSLog(@"finish button process complete!");
 }
@@ -224,7 +228,6 @@
             NSString *description = _descriptionTextField.text;
             NSLog(@"description: %@", description);
             
-            [_activity setDesc: description];
 //            [_descTxtField setAlpha:0];
             
             NSLog(@"description done process complete!");

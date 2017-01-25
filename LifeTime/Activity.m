@@ -13,8 +13,9 @@
 @property (nonatomic) NSString *category;
 @property NSString *desc;
 
-@property NSDate *startTime;
-@property NSDate *endTime;
+@property NSTimeInterval *duration;
+
+@property NSDate *finishedDate;
 
 @property int efficiency;
 

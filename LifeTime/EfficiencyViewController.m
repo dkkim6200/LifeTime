@@ -42,10 +42,12 @@
     NSLog(@"%@", [NSString stringWithFormat:@"%.0f", slider.currentValue ]);
 }
 
--(IBAction)saveBtnPressed:(id)sender {
+-(IBAction)saveButtonPressed:(id)sender {
     NSLog(@"save button clicked!");
     
     [self dismissViewControllerAnimated:YES completion:NULL];
+    
+    
     
     NSLog(@"save button process complete!");
 }
