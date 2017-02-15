@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -64,7 +64,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="43"/>
                                 <state key="normal" title="S T A R T"/>
                                 <connections>
-                                    <action selector="startButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hKG-E2-xoN"/>
+                                    <action selector="startButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m2d-38-PAZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNa-wn-Ecx">
@@ -79,6 +79,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="finishButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JQA-q0-eWR"/>
+                                    <segue destination="SKc-G1-XQA" kind="show" identifier="showEfficiencySegue" id="JVE-85-cXu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -91,7 +92,6 @@
                         <outlet property="descriptionTextField" destination="LXO-Db-ieq" id="EiF-ts-Aag"/>
                         <outlet property="finishButton" destination="VUe-Uy-IHG" id="LPI-jB-ZWR"/>
                         <outlet property="resetButton" destination="VNa-wn-Ecx" id="EJh-Z3-0br"/>
-                        <outlet property="startButton" destination="FsA-ep-4Pj" id="VHE-BE-Op0"/>
                         <outlet property="timerLabel" destination="HT0-sA-EvB" id="Xl7-vo-MtU"/>
                     </connections>
                 </viewController>
@@ -131,7 +131,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="46"/>
                                 <state key="normal" title="S A V E"/>
                                 <connections>
-                                    <action selector="saveBtnPressed:" destination="SKc-G1-XQA" eventType="touchUpInside" id="Glc-0D-fGw"/>
+                                    <action selector="saveButtonPressed:" destination="SKc-G1-XQA" eventType="touchUpInside" id="cYM-zo-fAB"/>
                                 </connections>
                             </button>
                         </subviews>

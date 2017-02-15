@@ -14,11 +14,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *percentageLabel;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 
-@property (strong, nonatomic) NSString *category;
-@property (strong, nonatomic) NSString *description;
-
+@property (nonatomic) NSString *category;
+@property (nonatomic) NSString *desc;
 @property NSTimeInterval duration;
+@property (nonatomic) NSInteger efficiency;
 
-@property (strong, nonatomic) NSString *efficiency;
+//- (id)initWithName:(NSString *)category desc:(NSString *)theDesc duration:(NSTimeInterval)theDuration;
 
 @end

@@ -102,16 +102,14 @@
     [_categoryLabel setAlpha:1];
     _categoryLabel.text = selectedCategory;
     
-    NSLog(@"_categoryLabel.text length %lu",[_categoryLabel.text length]);
+//    NSLog(@"_categoryLabel.text %@",_categoryLabel.text);
+//    NSLog(@"_categoryLabel.text length %lu",[_categoryLabel.text length]);
+    
     if ([_categoryLabel.text length] != 0) {
         [_categorySelectButton setAlpha:0];
     }
 }
-
 - (IBAction)startButton:(id)sender {
-    NSLog(@"categoryLabel.text length %lu",[_categoryLabel.text length]);
-    NSLog(@"_descriptionTextField.text length %lu",[_descriptionTextField.text length]);
-
     if ([_categoryLabel.text length] != 0 && [_descriptionTextField.text length] != 0) {
         if([[(UIButton *)sender currentTitle]isEqualToString:@"S T A R T"]) {
             
@@ -124,7 +122,6 @@
                 _stopPressed = false;
                 [_timer resetTimer];
                 [_timer startTimer];
-                
             }
             // THIS IS WHEN START BUTTON IS PRESSED WITHOUT RESET OR WHEN IT'S NOT FIRST TIME STARTING
             if (_stopPressed && !_resetPressed) {
@@ -139,18 +136,15 @@
                 [_finishButton setTitle:@"" forState:UIControlStateNormal];
                 
                 [_descriptionTextField setEnabled:true];
-                
-                
             }
-            
             // change the button text to STOP
             [sender setTitle:@"S T O P" forState:UIControlStateNormal];
         }
         
         // THIS IS WHEN STOP BUTTON IS PRESSED
         else if([[(UIButton *)sender currentTitle]isEqualToString:@"S T O P"]){
+            NSLog(@"stop button clicked!");
             _stopPressed = true;
-            
             [_timer pauseTimer];
             
             // resetButton appear
@@ -171,10 +165,36 @@
 }
 
 - (IBAction)resetButton:(id)sender {
+    [self resetEverything];
+}
+
+- (IBAction)finishButton:(id)sender {
+    NSLog (@"category: %@", self.categoryLabel.text);
+    NSLog (@"description: %@", self.descriptionTextField.text);
+    NSLog (@"duration: %f", [self.timer getInterval]);
+    NSLog(@"finish button clicked!");
+    
+//    [self resetButton:NULL]; --> 나쁜 놈
+    [self performSegueWithIdentifier:@"showEfficiencySegue" sender:self];
+    
+    // 지금은 일단 finish 누르면 reset되게 해놨는데 보기에는 그닥 안좋음..
+    // save button 누를때 reset하려면 public method 만들어야 될거 같아서 그렇게 좋은 방법은 아닌듯?? 모르겠다.. further discussion is required
+    [self resetEverything];
+}
+
+// send data to EVC
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"showEfficiencySegue"]){
+        EfficiencyViewController *efficiencyViewController = (EfficiencyViewController *)segue.destinationViewController;
+        efficiencyViewController.category = self.categoryLabel.text;
+        efficiencyViewController.desc = self.descriptionTextField.text;
+        efficiencyViewController.duration = [self.timer getInterval];
+    }
+}
+
+- (void)resetEverything {
     _resetPressed = true;
     [_timer resetTimer]; // redundant??????????????????????????????????????????????????????????????????????
-//    _timerLabel.text = @"00:00";
-    
     
     // resetButton disappeared
     [_resetButton setEnabled:NO];
@@ -183,13 +203,11 @@
     [_finishButton setEnabled: NO];
     [_finishButton setTitle:@"" forState:UIControlStateNormal];
     
-    
     // emptying the category Lable and the description field
     _categoryLabel.text = @"";
     _descriptionTextField.text = @"";
     
     // make everything visible
-    
     [_categoryPicker reloadAllComponents];
     [_categoryPicker selectRow:0 inComponent:0 animated:YES];
     [_categoryPicker setAlpha:1];
@@ -198,54 +216,15 @@
     [_descriptionTextField setAlpha:1];
 }
 
-- (IBAction)finishButton:(id)sender {
-    NSLog(@"finish button clicked!");
-    
-    [self resetButton:NULL];
-
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    EfficiencyViewController *efficiencyViewController = [storyboard instantiateViewControllerWithIdentifier:@"EfficiencyView"];
-    
-//    efficiencyViewController.category = _categoryLabel.text;
-//    efficiencyViewController.description = _descriptionTextField.text;
-//    
-//    efficiencyViewController.duration = [_timer getInterval];
-//    efficiencyViewController.description = _descriptionTextField.text;
-
-    
-    
-    efficiencyViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:efficiencyViewController animated:YES completion:NULL];
-    
-    NSLog(@"finish button process complete!");
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if ([textField.accessibilityLabel isEqual: @"Desc"]) {
-        NSLog(@"description done button clicked!");
-        
         if ([_descriptionTextField.text length] != 0) {
             NSString *description = _descriptionTextField.text;
             NSLog(@"description: %@", description);
-            
-//            [_descTxtField setAlpha:0];
-            
-            NSLog(@"description done process complete!");
         }
     }
     
     [textField resignFirstResponder];
     return YES;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end
