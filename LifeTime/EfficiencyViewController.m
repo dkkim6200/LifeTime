@@ -8,6 +8,7 @@
 
 #import "EfficiencyViewController.h"
 #import "EFCircularSlider.h"
+#import "DBManager.h"
 
 @interface EfficiencyViewController ()
 
@@ -87,6 +88,14 @@
     NSLog (@"eff category2: %@", self.category);
     NSLog (@"effdescription2: %@", self.desc);
     NSLog (@"eff duration2: %f", self.duration);
+    
+    DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
+    
+    NSString *query = [NSString stringWithFormat:@"SELECT * FROM categories"];
+    
+    NSArray *activities = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
+    
+//    NSLog(@"TEST!!!!!!!!!!!!! %@ ======================", [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]]);
     
     [self dismissViewControllerAnimated:YES completion:NULL];
     
