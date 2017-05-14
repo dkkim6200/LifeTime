@@ -20,7 +20,6 @@
 		83D84EA11E136BB100FF2B04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D84E9F1E136BB100FF2B04 /* Main.storyboard */; };
 		83D84EA31E136BB100FF2B04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83D84EA21E136BB100FF2B04 /* Assets.xcassets */; };
 		83D84EA61E136BB100FF2B04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D84EA41E136BB100FF2B04 /* LaunchScreen.storyboard */; };
-		83DB2FF51E5F7E7F00C2FF15 /* lifetime_db_2.db in Resources */ = {isa = PBXBuildFile; fileRef = 83DB2FF41E5F7E7C00C2FF15 /* lifetime_db_2.db */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +45,6 @@
 		83D84EA21E136BB100FF2B04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83D84EA51E136BB100FF2B04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83D84EA71E136BB100FF2B04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		83DB2FF41E5F7E7C00C2FF15 /* lifetime_db_2.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = lifetime_db_2.db; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +107,6 @@
 		83D84E951E136BB100FF2B04 /* LifeTime */ = {
 			isa = PBXGroup;
 			children = (
-				83DB2FF41E5F7E7C00C2FF15 /* lifetime_db_2.db */,
 				8385B9551E5BFC58000C53A0 /* lifetime_db.db */,
 				8385BE0C1E25B6770081A8C3 /* EFCircularSlider */,
 				83D84E991E136BB100FF2B04 /* AppDelegate.h */,
@@ -196,7 +193,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83DB2FF51E5F7E7F00C2FF15 /* lifetime_db_2.db in Resources */,
 				8385B9561E5C0334000C53A0 /* lifetime_db.db in Resources */,
 				83D84EA61E136BB100FF2B04 /* LaunchScreen.storyboard in Resources */,
 				83D84EA31E136BB100FF2B04 /* Assets.xcassets in Resources */,

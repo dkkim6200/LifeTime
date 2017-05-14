@@ -16,41 +16,6 @@
 
 @implementation EfficiencyViewController
 
-//- (id)initWithName:(NSString *)category desc:(NSString *)theDesc duration:(NSTimeInterval)theDuration {
-//    
-////    self = [super initWithNibName:@"EfficiencyViewController" bundle:nil];
-//    
-////    if (self != nil) {
-////    if (self = [super init]) {
-//    if (self != nil) {
-//        NSLog (@"copying the values");
-//
-//        _category = category;
-//        _desc = theDesc;
-//        _duration = theDuration;
-//        
-//        NSLog (@"eff category2: %@", _category);
-//        NSLog (@"effdescription2: %@", _desc);
-//        NSLog (@"eff duration2: %f", _duration);
-//    }
-////    NSLog (@"eff category2: %@", _category);
-////    NSLog (@"effdescription2: %@", _desc);
-////    NSLog (@"eff duration2: %f", _duration);
-//    return self;
-//}
-
-//
-//- (id)initWithName:(NSString *)category desc:(NSString *)theDesc duration:(NSTimeInterval)theDuration {
-//
-////    self = [super initWithNibName:@"EfficiencyViewController" bundle:nil];
-//    if (self != nil) {//
-//        _category = category;
-//        _desc = theDesc;
-//        _duration = theDuration;
-//    }
-//    return self;
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -79,23 +44,33 @@
 }
 
 - (IBAction)saveButtonPressed:(id)sender {
-    NSLog(@"save button pressed!");
+    NSLog(@"*INFO*: save button pressed!");
     
     _efficiency = [_percentageLabel.text intValue];
     _percentageLabel.text = nil;
     
-    NSLog(@"efficiency: %li%%", (long)self.efficiency);
-    NSLog (@"eff category2: %@", self.category);
-    NSLog (@"effdescription2: %@", self.desc);
-    NSLog (@"eff duration2: %f", self.duration);
+    NSLog(@"*INFO*: eff category: %@", self.category);
+    NSLog(@"*INFO*: eff description: %@", self.desc);
+    NSLog(@"*INFO*: eff duration: %f", self.duration);
+    NSLog(@"*INFO*: efficiency: %li%%", (long)self.efficiency);
     
     DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
     
-    NSString *query = [NSString stringWithFormat:@"SELECT * FROM categories"];
+    // SELECT name FROM sqlite_master WHERE type = "table"
     
-    NSArray *activities = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
     
-//    NSLog(@"TEST!!!!!!!!!!!!! %@ ======================", [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]]);
+    NSString *findCategoryIndexQuery = [NSString stringWithFormat:@"SELECT * FROM categories WHERE name LIKE \"%@\"", _category];
+    int categoryIndex = [[[[dbManager loadDataFromDB:findCategoryIndexQuery] objectAtIndex:0] objectAtIndex:0] intValue];
+    
+    
+    NSString *insertActivityQuery = [NSString stringWithFormat:@"INSERT INTO activities (category_id,duration,efficiency,description,finish_time) VALUES (%d, %d, %d, \"%@\", %d)", categoryIndex, (int)_duration, (int) _efficiency, _desc, (int) [[NSDate date] timeIntervalSince1970]];
+    [dbManager executeQuery:insertActivityQuery];
+    
+    
+//    NSString *selectActivitiesQuery = [NSString stringWithFormat:@"SELECT * FROM activities"];
+//    NSArray *activities = [dbManager loadDataFromDB:selectActivitiesQuery];
+//    NSLog(@"%@\n%@\n\n\n", selectActivitiesQuery, activities);
+    
     
     [self dismissViewControllerAnimated:YES completion:NULL];
     

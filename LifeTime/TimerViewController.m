@@ -10,13 +10,14 @@
 #import "TimerViewController.h"
 #import "Activity.h"
 #import "EfficiencyViewController.h"
+#import "DBManager.h"
 
 @interface TimerViewController ()
 
 @property (strong, nonatomic) Timer *timer; // Store the timer that fires after a certain time
 @property (strong, nonatomic) NSTimer *painter; // updates the timer with the time received from TimerViewController::timer
 
-@property NSArray *activityCategories;
+@property NSMutableArray *activityCategories;
 
 //----------------------------------------------------------------------
 // timer related
@@ -36,17 +37,14 @@
     _stopPressed = false;
     _timer = [[Timer alloc] init];
 
-    _activityCategories = @[@"Work",
-                           @"Study",
-                           @"Exercise",
-                           @"Rest",
-                           @"Eat",
-                           @"Fun",
-                           @"Social",
-                           @"Food",
-                           @"Shopping",
-                           @"Religious",
-                           @"Etc"];
+    DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
+    NSString *query = [NSString stringWithFormat:@"%@", @"SELECT * FROM categories"];
+    NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
+    
+    _activityCategories = [[NSMutableArray alloc] initWithCapacity:result.count];
+    for (int i = 0; i < result.count; i++) {
+        [_activityCategories addObject:[[result objectAtIndex:i] objectAtIndex:1]];
+    }
     
     _categoryPicker.dataSource = self;
     _categoryPicker.delegate = self;
@@ -95,7 +93,7 @@
 - (IBAction)categorySelectButton:(id)sender {
     int row = [_categoryPicker selectedRowInComponent:0];
     NSString *selectedCategory = [_activityCategories objectAtIndex:row];
-    NSLog (@"selected activity: %@", selectedCategory);
+    NSLog (@"*INFO*: selected activity: %@", selectedCategory);
     
     [_categoryPicker setAlpha:0]; // if ok button is pressed, picker "dissappears" = transparent
     [_categoryLabel setEnabled:true];
@@ -143,7 +141,7 @@
         
         // THIS IS WHEN STOP BUTTON IS PRESSED
         else if([[(UIButton *)sender currentTitle]isEqualToString:@"S T O P"]){
-            NSLog(@"stop button clicked!");
+            NSLog(@"*INFO*: stop button clicked!");
             _stopPressed = true;
             [_timer pauseTimer];
             
@@ -159,7 +157,7 @@
         }
     }
     else {
-        NSLog(@"Must fill the category or the description to start timer!!");
+        NSLog(@"*WARNING*: Must fill the category or the description to start timer!!");
         return;
     }
 }
@@ -169,10 +167,7 @@
 }
 
 - (IBAction)finishButton:(id)sender {
-    NSLog (@"category: %@", self.categoryLabel.text);
-    NSLog (@"description: %@", self.descriptionTextField.text);
-    NSLog (@"duration: %f", [self.timer getInterval]);
-    NSLog(@"finish button clicked!");
+    NSLog(@"*INFO*: finish button clicked!");
     
 //    [self resetButton:NULL]; --> 나쁜 놈
     [self performSegueWithIdentifier:@"showEfficiencySegue" sender:self];
@@ -220,7 +215,7 @@
     if ([textField.accessibilityLabel isEqual: @"Desc"]) {
         if ([_descriptionTextField.text length] != 0) {
             NSString *description = _descriptionTextField.text;
-            NSLog(@"description: %@", description);
+            NSLog(@"*INFO*: description: %@", description);
         }
     }
     
