@@ -10,6 +10,8 @@
 		073203EA1E5206FA00991F19 /* EfficiencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073203E91E5206FA00991F19 /* EfficiencyViewController.m */; };
 		076F3DB31E17771E006999E9 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 076F3DB21E17771E006999E9 /* Timer.m */; };
 		07ADCFAC1E1C75F600EA7BA9 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ADCFAB1E1C75F600EA7BA9 /* Activity.m */; };
+		07B8CB921EC80312003570BF /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07B8CB8F1EC8030C003570BF /* Charts.framework */; };
+		07B8CB931EC80312003570BF /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07B8CB8F1EC8030C003570BF /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E14DB61E136E11002A6ED0 /* TimerViewController.m */; };
 		836E08D91E175F0D00B3FEA5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 836E08D81E175F0D00B3FEA5 /* DBManager.m */; };
 		836E08DC1E176D5D00B3FEA5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 836E08DB1E176D5D00B3FEA5 /* libsqlite3.tbd */; };
@@ -22,6 +24,44 @@
 		83D84EA61E136BB100FF2B04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D84EA41E136BB100FF2B04 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		07B8CB8E1EC8030C003570BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07B8CB891EC8030C003570BF /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06165F241D8110E600722320;
+			remoteInfo = Charts;
+		};
+		07B8CB901EC8030C003570BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07B8CB891EC8030C003570BF /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06165F2E1D8110E600722320;
+			remoteInfo = ChartsTests;
+		};
+		07B8CB941EC80312003570BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07B8CB891EC8030C003570BF /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 06165F231D8110E600722320;
+			remoteInfo = Charts;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		07B8CB961EC80312003570BF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				07B8CB931EC80312003570BF /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		073203E81E5206FA00991F19 /* EfficiencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EfficiencyViewController.h; sourceTree = "<group>"; };
 		073203E91E5206FA00991F19 /* EfficiencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EfficiencyViewController.m; sourceTree = "<group>"; };
@@ -29,6 +69,8 @@
 		076F3DB21E17771E006999E9 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
 		07ADCFAA1E1C75F600EA7BA9 /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		07ADCFAB1E1C75F600EA7BA9 /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
+		07B8CB891EC8030C003570BF /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../downloads/Charts-master/Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
+		07B8CB971EC80341003570BF /* LifeTime-Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LifeTime-Swift.h"; sourceTree = SOURCE_ROOT; };
 		07E14DB51E136E11002A6ED0 /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		07E14DB61E136E11002A6ED0 /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
 		836E08D71E175F0D00B3FEA5 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
@@ -53,12 +95,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				836E08DC1E176D5D00B3FEA5 /* libsqlite3.tbd in Frameworks */,
+				07B8CB921EC80312003570BF /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07B8CB8A1EC8030C003570BF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07B8CB8F1EC8030C003570BF /* Charts.framework */,
+				07B8CB911EC8030C003570BF /* ChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		836E08DA1E176D5D00B3FEA5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +142,7 @@
 		83D84E8A1E136BB100FF2B04 = {
 			isa = PBXGroup;
 			children = (
+				07B8CB891EC8030C003570BF /* Charts.xcodeproj */,
 				83D84E951E136BB100FF2B04 /* LifeTime */,
 				83D84E941E136BB100FF2B04 /* Products */,
 				836E08DA1E176D5D00B3FEA5 /* Frameworks */,
@@ -108,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				8385B9551E5BFC58000C53A0 /* lifetime_db.db */,
+				07B8CB971EC80341003570BF /* LifeTime-Swift.h */,
 				8385BE0C1E25B6770081A8C3 /* EFCircularSlider */,
 				83D84E991E136BB100FF2B04 /* AppDelegate.h */,
 				83D84E9A1E136BB100FF2B04 /* AppDelegate.m */,
@@ -145,10 +199,12 @@
 				83D84E8F1E136BB100FF2B04 /* Sources */,
 				83D84E901E136BB100FF2B04 /* Frameworks */,
 				83D84E911E136BB100FF2B04 /* Resources */,
+				07B8CB961EC80312003570BF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				07B8CB951EC80312003570BF /* PBXTargetDependency */,
 			);
 			name = LifeTime;
 			productName = LifeTime;
@@ -181,12 +237,35 @@
 			mainGroup = 83D84E8A1E136BB100FF2B04;
 			productRefGroup = 83D84E941E136BB100FF2B04 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 07B8CB8A1EC8030C003570BF /* Products */;
+					ProjectRef = 07B8CB891EC8030C003570BF /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				83D84E921E136BB100FF2B04 /* LifeTime */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		07B8CB8F1EC8030C003570BF /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 07B8CB8E1EC8030C003570BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		07B8CB911EC8030C003570BF /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = 07B8CB901EC8030C003570BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		83D84E911E136BB100FF2B04 /* Resources */ = {
@@ -219,6 +298,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07B8CB951EC80312003570BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = 07B8CB941EC80312003570BF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		83D84E9F1E136BB100FF2B04 /* Main.storyboard */ = {
@@ -333,6 +420,7 @@
 		83D84EAB1E136BB100FF2B04 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = LifeTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -344,6 +432,7 @@
 		83D84EAC1E136BB100FF2B04 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = LifeTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
