@@ -18,31 +18,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    
-//    DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
-//    
-//    NSString *query = [NSString stringWithFormat:@"SELECT * FROM activities"];
-//    NSArray *activities = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
-//    
-//    if ([activities count] == 0) {
-//        query = [NSString stringWithFormat:
-//                 @"CREATE TABLE `activities` ( \
-//                     `id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \
-//                     `category`	TEXT, \
-//                     `duration`	INTEGER, \
-//                     `efficiency`	INTEGER, \
-//                     `description`	TEXT, \
-//                     `finish_time`	INTEGER \
-//                 );"];
-//        //[dbManager executeQuery:query];
-//        
-//        query = [NSString stringWithFormat:@"INSERT INTO `activities`(`id`,`category`,`duration`,`efficiency`,`description`,`finish_time`) VALUES (1,'Work',10,60,'boi','6969696');"];
-//        [dbManager executeQuery:query];
-//        
-//        query = [NSString stringWithFormat:@"SELECT * FROM activities"];
-//        activities = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
-//    }
-    
     return YES;
 }
 
