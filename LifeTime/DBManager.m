@@ -30,9 +30,6 @@
 @implementation DBManager 
     
 -(instancetype)initWithDatabaseFilename:(NSString *)dbFilename{
-    
-    NSLog(@"*INFO*: DBManager::initWithDatabaseFilename() called");
-
     self = [super init];
     if (self) {
         // Set the documents directory path to the documentsDirectory property.

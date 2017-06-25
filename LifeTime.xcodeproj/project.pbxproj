@@ -19,6 +19,7 @@
 		83856CC71ECA881E004ACD7A /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83856CC31ECA8819004ACD7A /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8385B9561E5C0334000C53A0 /* lifetime_db.db in Resources */ = {isa = PBXBuildFile; fileRef = 8385B9551E5BFC58000C53A0 /* lifetime_db.db */; };
 		8385BE0F1E25B6770081A8C3 /* EFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8385BE0E1E25B6770081A8C3 /* EFCircularSlider.m */; };
+		83B2AB7F1EFF23C900C05132 /* CategoryManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B2AB7E1EFF23C900C05132 /* CategoryManagerViewController.m */; };
 		83D84E981E136BB100FF2B04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E971E136BB100FF2B04 /* main.m */; };
 		83D84E9B1E136BB100FF2B04 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E9A1E136BB100FF2B04 /* AppDelegate.m */; };
 		83D84EA11E136BB100FF2B04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D84E9F1E136BB100FF2B04 /* Main.storyboard */; };
@@ -85,6 +86,8 @@
 		8385B9551E5BFC58000C53A0 /* lifetime_db.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = lifetime_db.db; sourceTree = "<group>"; };
 		8385BE0D1E25B6770081A8C3 /* EFCircularSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFCircularSlider.h; sourceTree = "<group>"; };
 		8385BE0E1E25B6770081A8C3 /* EFCircularSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFCircularSlider.m; sourceTree = "<group>"; };
+		83B2AB7D1EFF23C900C05132 /* CategoryManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryManagerViewController.h; sourceTree = "<group>"; };
+		83B2AB7E1EFF23C900C05132 /* CategoryManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryManagerViewController.m; sourceTree = "<group>"; };
 		83D84E931E136BB100FF2B04 /* LifeTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D84E971E136BB100FF2B04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83D84E991E136BB100FF2B04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -145,8 +148,18 @@
 				073203E91E5206FA00991F19 /* EfficiencyViewController.m */,
 				83120A741EC80666005CE37F /* GraphViewController.h */,
 				83120A751EC80666005CE37F /* GraphViewController.m */,
+				83BCA71D1EFEDEA20095238C /* Settings */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		83BCA71D1EFEDEA20095238C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				83B2AB7D1EFF23C900C05132 /* CategoryManagerViewController.h */,
+				83B2AB7E1EFF23C900C05132 /* CategoryManagerViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		83D84E8A1E136BB100FF2B04 = {
@@ -298,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8385BE0F1E25B6770081A8C3 /* EFCircularSlider.m in Sources */,
+				83B2AB7F1EFF23C900C05132 /* CategoryManagerViewController.m in Sources */,
 				073203EA1E5206FA00991F19 /* EfficiencyViewController.m in Sources */,
 				076F3DB31E17771E006999E9 /* Timer.m in Sources */,
 				07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */,
