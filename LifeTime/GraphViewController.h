@@ -17,6 +17,9 @@
 }
 
 @property (nonatomic, retain) IBOutlet UISegmentedControl *modeSwitch;
+@property (weak, nonatomic) IBOutlet BarChartView *barChartView;
+@property (weak, nonatomic) IBOutlet PieChartView *pieChartView;
+
 
 - (IBAction)modeChanged:(id)sender;
 

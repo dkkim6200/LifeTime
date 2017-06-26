@@ -12,9 +12,6 @@
 @import Charts;
 
 @interface GraphViewController () <ChartViewDelegate>
-@property (weak, nonatomic) IBOutlet BarChartView *barChartView;
-@property (weak, nonatomic) IBOutlet PieChartView *pieChartView;
-
 @property (weak, nonatomic) IBOutlet UILabel *dailyAvgEff;
 @property (weak, nonatomic) IBOutlet UILabel *dailyMsg;
 @end
@@ -169,9 +166,11 @@
     }
     
     [self drawBarChart:period];
-    [self.view setNeedsDisplay];
     [self drawPieChart:period];
     [self.view setNeedsDisplay];
+    
+    [self.barChartView animateWithYAxisDuration:1.0];
+    [self.pieChartView animateWithYAxisDuration:1.0];
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------
@@ -381,6 +380,14 @@
 //            [self updateChartData:@"daily"];
             [self updateChartData:@"day"];
             NSLog(@"daily");
+            
+            if (self.pieChartView.alpha == 0) {
+                self.barChartView.alpha = 0;
+                self.pieChartView.alpha = 1;
+                
+                [self.pieChartView animateWithYAxisDuration:1.0];
+            }
+            
             break;
         case 1:
             // show weekly here;
@@ -402,10 +409,28 @@
     }
 }
 
+- (IBAction)graphTapped:(id)sender {
+    NSLog(@"graphTapped");
+    
+    if (self.modeSwitch.selectedSegmentIndex != 0) {
+        if (self.barChartView.alpha == 0) {
+            self.barChartView.alpha = 1;
+            self.pieChartView.alpha = 0;
+            
+            [self.barChartView animateWithYAxisDuration:1.0];
+        }
+        else if (self.pieChartView.alpha == 0) {
+            self.barChartView.alpha = 0;
+            self.pieChartView.alpha = 1;
+            
+            [self.pieChartView animateWithYAxisDuration:1.0];
+        }
+    }
+}
+
 #pragma mark - Actions
 
 #pragma mark - ChartViewDelegate
-
 
 - (void)chartValueSelected:(ChartViewBase * __nonnull)chartView entry:(ChartDataEntry * __nonnull)entry highlight:(ChartHighlight * __nonnull)highlight
 {
