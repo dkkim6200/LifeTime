@@ -24,6 +24,9 @@
     NSMutableArray *categories;
     int lastSamePeriodActivityStartIndex;
     int lastSamePeriodActivityEndIndex;
+    NSArray *weekdays;
+    NSArray *weeks;
+    NSArray *months;
 }
 
 @synthesize modeSwitch;
@@ -31,7 +34,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    weekdays = [NSArray arrayWithObjects: @"Mon", @"Tue", @"Wed", @"Thu", @"Fri", @"Sat", @"Sun", nil];
+    weeks = [NSArray arrayWithObjects: @"Week 1", @"Month 2", @"Week 3", @"Week 4", nil];
+    months = [NSArray arrayWithObjects: @"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil];
+
     DBManager *dbManager1 = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
     NSString *selectActivitiesQuery = [NSString stringWithFormat:@"SELECT * FROM activities"];
     activities = [dbManager1 loadDataFromDB:selectActivitiesQuery];
@@ -143,7 +149,10 @@
     _pieChartView.entryLabelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.f];
     [_pieChartView animateWithXAxisDuration:1.4 easingOption:ChartEasingOptionEaseOutBack];
     [self updateChartData];
-    [self calcDailyAvgEff];
+    
+    [self setPieInterval:@"day"];
+//    [self calcDailyAvgEff:lastSamePeriodActivityStartIndex endIndex:lastSamePeriodActivityEndIndex];
+    [self avgEff];
 }
 
 - (void)didReceiveMemoryWarning
@@ -154,18 +163,17 @@
 
 - (void)updateChartData
 {
-    if (self.shouldHideData)
-    {
+    if (self.shouldHideData) {
         _barChartView.data = nil;
         _pieChartView.data = nil;
         return;
     }
     
-//    [self setBarDataCount:_sliderX.value * 15 range:_sliderY.value * 100];
-//    [self setBarDataCount:7 range:100];//arbitary values
+//    [self drawBarChart:@"month"];
+    [self drawBarChart];
 //    [self drawPieChart:[self setPieData:@"day"]];
 //    [self drawPieChart:[self setPieData:@"week"]];
-    [self drawPieChart:[self setPieData:@"month"]];
+    [self drawPieChart:@"month"];
 //    [self drawPieChart:[self setPieData:@"year"]];
 }
 
@@ -178,24 +186,16 @@
 //------------------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------Draw bar chart-----------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------------------
-- (void)drawBarChart:(NSMutableArray*) values {
-    int count = 7;
-    int range = 100;
+- (void)drawBarChart {
     NSMutableArray *yVals = [[NSMutableArray alloc] init];
-    
-    int startingDataIndex = 1;
-    
-    for (int i = startingDataIndex; i < startingDataIndex + count; i++)
-    {
-        double mult = (range + 1);
-        double val = (double) (arc4random_uniform(mult));
-        if (arc4random_uniform(100) < 25) {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
-        } else {
-            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
-        }
+    NSMutableArray *values = [[NSMutableArray alloc] init];
+    values = [self parseArray:[self avgEff] time: @"year"];
+    int numData = values.count;
+    for (int i = 0; i < numData; i++) {
+        [yVals addObject:[[BarChartDataEntry alloc] initWithX:numData-i y:[values[i] doubleValue] icon: [UIImage imageNamed:@"icon"]]]; // x values are 7-i to make the graph go from right-->left
     }
-    
+    NSLog(@" %@", yVals);
+
     BarChartDataSet *set1 = nil;
     if (_barChartView.data.dataSetCount > 0)
     {
@@ -226,8 +226,72 @@
 //------------------------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------Organize bar data----------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------------------
+-(NSMutableArray *) avgEff {
+    NSMutableArray *avgEffValues = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 500; i++) { // arbitrary value
+        [avgEffValues addObject:[NSNumber numberWithInt:0]];
+    }
+    NSDate *now = [NSDate date];
+    int index = 0;
+    int activitiesIndex = (int)activities.count-1;
+    int effSum = 0;
+    int count = 0;
+    while (index < [avgEffValues count] ) {
+        NSDate *activitiesDate = [NSDate dateWithTimeIntervalSince1970:[activities[activitiesIndex][5] doubleValue]];
+        int diff = (int)[self daysBetweenDate:now andDate:activitiesDate];
+        //        NSLog(@"##0: index: %d diff: %d", index, -diff);
+        while (-diff == index && activitiesIndex > 0) {
+            effSum += [activities[activitiesIndex][3] intValue];
+            count++;
+            activitiesIndex--;
+            activitiesDate = [NSDate dateWithTimeIntervalSince1970:[activities[activitiesIndex][5] doubleValue]];
+            diff = (int)[self daysBetweenDate:now andDate:activitiesDate];
+            //            NSLog(@"##1: effSum: %d count: %d index: %d activitiesIndex: %d diff: %d", effSum, count, index, activitiesIndex, -diff);
+        }
+        if (count == 0) {
+            index++;
+            //            NSLog(@"##2: index: %d", index);
+        }
+        else {
+            //            NSLog(@"##3: effSum: %d count: %d index: %d", effSum, count, index);
+            [avgEffValues insertObject:[NSNumber numberWithInt:effSum/count] atIndex:index];
+            effSum = 0;
+            count = 0;
+            index++;
+        }
+        //        NSLog(@"##4: index: %d diff: %d", index, -diff);
+    }
+    //    NSLog(@"avgEffValues: %@", avgEffValues);
+    return avgEffValues;
+}
 
-
+-(NSMutableArray *) parseArray: (NSMutableArray *)avgEffArray time: (NSString *) period {
+    int parseBoundary = 0;
+    int size = 1;
+    if ([period isEqualToString: @"week"]) {
+        parseBoundary = 1;
+        size = 7;
+    }
+    else if ([period isEqualToString: @"month"]) {
+        parseBoundary = 7;
+        size = 4;
+    }
+    else if ([period isEqualToString: @"year"]) {
+        parseBoundary = 28;
+        size = 12;
+    }
+    NSMutableArray *weekArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < size; i++) {
+        //        NSLog(@"%zd", avgEffArray[i]);
+        int sum = 0;
+        for (int j = i*parseBoundary; j < (i+1)*parseBoundary; j++) {
+            sum += [avgEffArray[j] intValue];
+        }
+        [weekArray addObject:[NSNumber numberWithInt:sum/parseBoundary]];
+    }
+    NSLog(@"weekArray: %@", weekArray);
+    return weekArray;
+}
 
 //------------------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------------------
@@ -238,7 +302,11 @@
 //------------------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------Draw pie chart-----------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------------------
-- (void)drawPieChart: (NSMutableArray *) values {
+//- (void)drawPieChart: (NSMutableArray *) values {
+- (void)drawPieChart: (NSString *) period {
+    [self setPieInterval:period];
+    NSMutableArray *values = [self setPieData:lastSamePeriodActivityStartIndex endIndex:lastSamePeriodActivityEndIndex];
+
     PieChartDataSet *dataSet = [[PieChartDataSet alloc] initWithValues:values];
     dataSet.drawIconsEnabled = YES;
     
@@ -276,8 +344,7 @@
 //------------------------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------Organize pie data----------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------------------
-
--(void)setIndexforPeriod: (NSString *)period {
+-(void)setPieInterval: (NSString *)period {
     int index = (int)[activities count]-1;
     NSLog(@"activities INDEX: %d", index);
     
@@ -296,7 +363,6 @@
     else if ([period isEqualToString: @"year"]) {
         dateOffset = 365;
     }
-
     int index1 = index;
     NSDate *now = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -317,32 +383,29 @@
     double endUnixTime = [endDate timeIntervalSince1970];
     
     NSLog(@" startUnixTime: %f \nweekBeforeStartUnixTime: %f ",startUnixTime, endUnixTime);
-    double dataUnixTime = [[activities objectAtIndex:index1][5] doubleValue];
+    double dataUnixTime = [activities[index1][5] doubleValue];
     while (dataUnixTime >= startUnixTime && index1 > 0) { // find the index that has the last activity that occurred within the same day
         index1--;
-        dataUnixTime = [[activities objectAtIndex:index1][5] doubleValue];
+        dataUnixTime = [activities[index1][5] doubleValue];
     }
     NSLog (@" different weekday index found! the index is: %d", index1);
     int index2 = index1-1; // index2 has to start after index 1, or else while loop doesn't run
     
     while (dataUnixTime >= endUnixTime && index2 > 0) { // this finds the index all the way to the previous week
         index2--;
-        NSLog(@" we in bois, index2: %d", index2);
+//        NSLog(@" we in bois, index2: %d", index2);
         dataUnixTime = [[activities objectAtIndex:index2][5] doubleValue];
     }
     lastSamePeriodActivityStartIndex = index2;  // start-----------end
     lastSamePeriodActivityEndIndex = index1;    // index2----------index1
 }
-- (NSMutableArray *)setPieData: (NSString *) period {
-    [self setIndexforPeriod:period];
-    
+- (NSMutableArray *)setPieData: (int) start endIndex:(int) end {
     NSMutableArray *pieChartValues = [[NSMutableArray alloc] init];
     for (int i = 0; i < categories.count; i++) {
         [pieChartValues addObject:[NSNumber numberWithInt:0]];
     }
-    //    bool check = [[NSCalendar currentCalendar] isDateInToday:date];
     for (int i = 0; i < pieChartValues.count; i++) {
-        for (int j = lastSamePeriodActivityEndIndex; j > lastSamePeriodActivityStartIndex; j--) {
+        for (int j = end; j > start; j--) {
             if (i == [[activities objectAtIndex:j][1] intValue]) { // if the category ID is the same as the activities array, add its duration to itl
                 int value = [pieChartValues[i] intValue]+ [[activities objectAtIndex:j][2] intValue]; // add to the current value and replace
                 [pieChartValues replaceObjectAtIndex:i withObject: [NSNumber numberWithInt:value]];
@@ -359,45 +422,46 @@
     return pieChartValues;
 }
 
-- (void) calcDailyAvgEff {
-    int effSum = 0;
-    int count = 0; // this is how many activities are TODAY
-//    NSLog(: %d", lastSamePeriodActivityIndex);
-    [self setIndexforPeriod:@"day"];
-
-    for (int i = lastSamePeriodActivityEndIndex; i > lastSamePeriodActivityStartIndex; i--) { // starting from the top data
-        effSum += [[activities objectAtIndex:i][3] intValue];
-        count++;
-    }
-    NSLog(@"count: %d", count);
+-(void) evalEff: (int) avg {
     NSString *daily;
     NSString *msg;
-    if (count == 0) { // when you haven't recorded any data for the day
-        daily = [NSString stringWithFormat:@"no recorded data for today"];
+
+    daily = [NSString stringWithFormat:@"You have been %d%% efficient today!", avg];
+    NSLog(@"effAvg: %d", avg);
+    
+    if (avg > 90) {
+        msg = [NSString stringWithFormat:@"Good job! You had a really productive day!"];
     }
-    else {
-        int effAvg = effSum / count;
-        daily = [NSString stringWithFormat:@"You have been %d%% efficient today!", effAvg];
-        NSLog(@"effSum: %d effAvg: %d", effSum, effAvg);
-        
-        if (effAvg > 90) {
-            msg = [NSString stringWithFormat:@"Good job! You had a really productive day!"];
-        }
-        else if (effAvg > 70) {
-            msg = [NSString stringWithFormat:@"Hey! That was a pretty decent day!"];
-        }
-        else if (effAvg >50) {
-            msg = [NSString stringWithFormat:@"Tommorow can be better."];
-        }
-        else if (effAvg <= 50) {
-            msg = [NSString stringWithFormat:@"Bruh."];
-        }
+    else if (avg > 70) {
+        msg = [NSString stringWithFormat:@"Hey! That was a pretty decent day!"];
+    }
+    else if (avg >50) {
+        msg = [NSString stringWithFormat:@"Tommorow can be better."];
+    }
+    else if (avg <= 50) {
+        msg = [NSString stringWithFormat:@"Bruh."];
     }
     _dailyAvgEff.text = daily; // putting the messages on the label
     _dailyMsg.text = msg;
 }
 
-
+- (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
+{
+    NSDate *fromDate;
+    NSDate *toDate;
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
+                 interval:NULL forDate:fromDateTime];
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
+                 interval:NULL forDate:toDateTime];
+    
+    NSDateComponents *difference = [calendar components:NSCalendarUnitDay
+                                               fromDate:fromDate toDate:toDate options:0];
+    
+    return [difference day];
+}
 // trying to refresh when clicked
 -(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     
@@ -455,5 +519,4 @@
     NSLog(@"chartValueNothingSelected");
 
 }
-
 @end
