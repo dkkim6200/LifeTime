@@ -54,31 +54,21 @@
     NSLog(@"*INFO*: eff duration: %f", self.duration);
     NSLog(@"*INFO*: efficiency: %li%%", (long)self.efficiency);
     
-    DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
-    
-    // SELECT name FROM sqlite_master WHERE type = "table"
-    
+    DBManager *dbManager2 = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
     
     NSString *findCategoryIndexQuery = [NSString stringWithFormat:@"SELECT * FROM categories WHERE name LIKE \"%@\" ORDER BY cat_order", _category];
-    int categoryIndex = [[[[dbManager loadDataFromDB:findCategoryIndexQuery] objectAtIndex:0] objectAtIndex:0] intValue];
+    int categoryIndex = [[[[dbManager2 loadDataFromDB:findCategoryIndexQuery] objectAtIndex:0] objectAtIndex:0] intValue];
     
     NSDateFormatter *df = [[NSDateFormatter alloc]init];
-    [df setDateFormat:@"yyyy-MM-dd: HH:mm:ss"];
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     df.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     df.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:[NSTimeZone localTimeZone].secondsFromGMT];
     NSString *finishDateString = [df stringFromDate:[NSDate date]];
     NSLog(@"dateString: %@", finishDateString);
     NSString *insertActivityQuery = [NSString stringWithFormat:@"INSERT INTO activities (category_id,duration,efficiency,description,finish_time) VALUES (%d, %d, %d, \"%@\", \"%@\")", categoryIndex, (int)_duration, (int) _efficiency, _desc, finishDateString];
-    [dbManager executeQuery:insertActivityQuery];
-    
-    
-//    NSString *selectActivitiesQuery = [NSString stringWithFormat:@"SELECT * FROM activities"];
-//    NSArray *activities = [dbManager loadDataFromDB:selectActivitiesQuery];
-//    NSLog(@"%@\n%@\n\n\n", selectActivitiesQuery, activities);
-    
+    [dbManager2 executeQuery:insertActivityQuery];
     
     [self dismissViewControllerAnimated:YES completion:NULL];
-    
 }
 
 - (void)didReceiveMemoryWarning {

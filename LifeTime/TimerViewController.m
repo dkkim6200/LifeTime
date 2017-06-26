@@ -49,9 +49,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
+    DBManager *dbManager1 = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
     NSString *query = [NSString stringWithFormat:@"%@", @"SELECT * FROM categories ORDER BY cat_order"];
-    NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
+    NSArray *result = [[NSArray alloc] initWithArray:[dbManager1 loadDataFromDB:query]];
     
     _activityCategories = [[NSMutableArray alloc] initWithCapacity:result.count];
     for (int i = 0; i < result.count; i++) {
