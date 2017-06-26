@@ -36,7 +36,18 @@
     _resetPressed = false;
     _stopPressed = false;
     _timer = [[Timer alloc] init];
+    
+    [_startButton addTarget:self action:@selector(startButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    _painter = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0 target:self
+                                                                    selector:@selector(paintTimer)
+                                                                  userInfo:nil
+                                                                   repeats:YES];
+    
+    _descriptionTextField.delegate = self;
+}
 
+- (void)viewWillAppear:(BOOL)animated {
     DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
     NSString *categoriesQuery = [NSString stringWithFormat:@"%@", @"SELECT * FROM categories"];
     NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:categoriesQuery]];
@@ -49,14 +60,7 @@
     _categoryPicker.dataSource = self;
     _categoryPicker.delegate = self;
     
-    [_startButton addTarget:self action:@selector(startButton) forControlEvents:UIControlEventTouchUpInside];
-    
-    _painter = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0 target:self
-                                                                    selector:@selector(paintTimer)
-                                                                  userInfo:nil
-                                                                   repeats:YES];
-    
-    _descriptionTextField.delegate = self;
+    [self.view setNeedsDisplay];
 }
 
 - (void)didReceiveMemoryWarning {
