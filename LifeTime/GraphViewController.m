@@ -287,7 +287,7 @@
         for (int j = i*parseBoundary; j < (i+1)*parseBoundary; j++) {
             sum += [avgEffArray[j] intValue];
         }
-        [weekArray addObject:[NSNumber numberWithInt:sum/parseBoundary]];
+        [dataArray addObject:[NSNumber numberWithInt:sum/parseBoundary]];
     }
     NSLog(@"dataArray: %@", dataArray);
     return dataArray;
