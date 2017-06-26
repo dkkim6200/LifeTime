@@ -62,8 +62,13 @@
     NSString *findCategoryIndexQuery = [NSString stringWithFormat:@"SELECT * FROM categories WHERE name LIKE \"%@\" ORDER BY cat_order", _category];
     int categoryIndex = [[[[dbManager loadDataFromDB:findCategoryIndexQuery] objectAtIndex:0] objectAtIndex:0] intValue];
     
-    
-    NSString *insertActivityQuery = [NSString stringWithFormat:@"INSERT INTO activities (category_id,duration,efficiency,description,finish_time) VALUES (%d, %d, %d, \"%@\", %d)", categoryIndex, (int)_duration, (int) _efficiency, _desc, (int) [[NSDate date] timeIntervalSince1970]];
+    NSDateFormatter *df = [[NSDateFormatter alloc]init];
+    [df setDateFormat:@"yyyy-MM-dd: HH:mm:ss"];
+    df.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    df.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:[NSTimeZone localTimeZone].secondsFromGMT];
+    NSString *finishDateString = [df stringFromDate:[NSDate date]];
+    NSLog(@"dateString: %@", finishDateString);
+    NSString *insertActivityQuery = [NSString stringWithFormat:@"INSERT INTO activities (category_id,duration,efficiency,description,finish_time) VALUES (%d, %d, %d, \"%@\", \"%@\")", categoryIndex, (int)_duration, (int) _efficiency, _desc, finishDateString];
     [dbManager executeQuery:insertActivityQuery];
     
     
