@@ -38,11 +38,11 @@
     weeks = [NSArray arrayWithObjects: @"Week 1", @"Month 2", @"Week 3", @"Week 4", nil];
     months = [NSArray arrayWithObjects: @"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil];
 
-//    DBManager *dbManager1 = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
-//    NSString *selectActivitiesQuery = [NSString stringWithFormat:@"SELECT * FROM activities"];
-//    activities = [dbManager1 loadDataFromDB:selectActivitiesQuery];
-//    NSLog(@"%@\n%@\n\n\n", selectActivitiesQuery, activities);
-//    NSLog(@"%@ activities: ", activities);
+    DBManager *dbManager1 = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
+    NSString *selectActivitiesQuery = [NSString stringWithFormat:@"SELECT * FROM activities"];
+    NSArray *activities = [dbManager1 loadDataFromDB:selectActivitiesQuery];
+    NSLog(@"%@\n%@\n\n\n", selectActivitiesQuery, activities);
+    NSLog(@"%@ activities: ", activities);
 
     // re-reading from db, because dbManger code is bad
     DBManager *dbManager2 = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
@@ -149,10 +149,7 @@
     _pieChartView.entryLabelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.f];
     [_pieChartView animateWithXAxisDuration:1.4 easingOption:ChartEasingOptionEaseOutBack];
     [self updateChartData:@"day"];
-    
-//    [self setPieInterval:@"day"];
-//    [self calcDailyAvgEff:lastSamePeriodActivityStartIndex endIndex:lastSamePeriodActivityEndIndex];
-//    [self avgEff];
+    [self evalEff];
 }
 
 - (void)didReceiveMemoryWarning
@@ -239,7 +236,6 @@
     for (int i = 0; i < numData; i++) {
         DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
         NSString *query = [NSString stringWithFormat:@"SELECT avg(efficiency) FROM activities WHERE finish_time BETWEEN datetime('now', 'localtime', '-%d days', 'start of day') AND datetime('now', 'localtime', '-%d days', 'start of day')", (numData-i)*factor, (numData-i-1)*factor];
-        //            NSLog(query);
         NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
         
         if (result.count == 0) {
@@ -252,21 +248,8 @@
     
     return efficiencyPercentages;
 }
-
-//------------------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
-//-------------------------------------------------------------PIE CHART--------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------Draw pie chart-----------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
-
 - (void)drawPieChart: (NSString *) period {
-//    [self setPieInterval:period];
-//    NSMutableArray *values = [self setPieData:lastSamePeriodActivityStartIndex endIndex:lastSamePeriodActivityEndIndex];
-    NSMutableArray<BarChartDataEntry *> *durationSums = [[NSMutableArray alloc] init];
+    NSMutableArray<PieChartDataEntry *> *durationSums = [[NSMutableArray alloc] init];
     int numDays = -1;
     if ([period isEqualToString:@"day"]) {
         numDays = 0;
@@ -275,7 +258,7 @@
         numDays = 7;
     }
     else if ([period isEqualToString:@"month"]) {
-        numDays = 30; // changed from 28
+        numDays = 28;
     }
     else if ([period isEqualToString:@"year"]) {
         numDays = 365;
@@ -336,7 +319,16 @@
     return durationSums;
 }
 
--(void) evalEff: (int) avg {
+-(int) getDailyAvgEff {
+    DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
+    NSString *query = [NSString stringWithFormat:@"SELECT avg(efficiency) FROM activities WHERE finish_time BETWEEN datetime('now', 'localtime', 'start of day') AND datetime('now', 'localtime')"];
+    NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
+    
+    return [result[0][0] intValue];
+}
+
+-(void) evalEff {
+    int avg = [self getDailyAvgEff];
     NSString *daily;
     NSString *msg;
 
