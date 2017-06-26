@@ -32,6 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     _firstStartButtonPressed = false;
     _resetPressed = false;
     _stopPressed = false;
@@ -49,12 +50,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
-    NSString *categoriesQuery = [NSString stringWithFormat:@"%@", @"SELECT * FROM categories"];
-    NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:categoriesQuery]];
+    NSString *query = [NSString stringWithFormat:@"%@", @"SELECT * FROM categories ORDER BY cat_order"];
+    NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
     
     _activityCategories = [[NSMutableArray alloc] initWithCapacity:result.count];
     for (int i = 0; i < result.count; i++) {
-        [_activityCategories addObject:[result[i] objectAtIndex:1]];
+        [_activityCategories addObject:[[result objectAtIndex:i] objectAtIndex:1]];
     }
     
     _categoryPicker.dataSource = self;

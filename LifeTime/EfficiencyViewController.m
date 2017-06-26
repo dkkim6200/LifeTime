@@ -54,12 +54,14 @@
     NSLog(@"*INFO*: eff duration: %f", self.duration);
     NSLog(@"*INFO*: efficiency: %li%%", (long)self.efficiency);
     
-    // Access SQL
     DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
     
     // SELECT name FROM sqlite_master WHERE type = "table"
-    NSString *findCategoryIndexQuery = [NSString stringWithFormat:@"SELECT * FROM categories WHERE name LIKE \"%@\"", _category];
+    
+    
+    NSString *findCategoryIndexQuery = [NSString stringWithFormat:@"SELECT * FROM categories WHERE name LIKE \"%@\" ORDER BY cat_order", _category];
     int categoryIndex = [[[[dbManager loadDataFromDB:findCategoryIndexQuery] objectAtIndex:0] objectAtIndex:0] intValue];
+    
     
     NSString *insertActivityQuery = [NSString stringWithFormat:@"INSERT INTO activities (category_id,duration,efficiency,description,finish_time) VALUES (%d, %d, %d, \"%@\", %d)", categoryIndex, (int)_duration, (int) _efficiency, _desc, (int) [[NSDate date] timeIntervalSince1970]];
     [dbManager executeQuery:insertActivityQuery];
