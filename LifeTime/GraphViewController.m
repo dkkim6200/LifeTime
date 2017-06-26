@@ -149,6 +149,10 @@
     [self evalEff];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self modeChanged:nil];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
