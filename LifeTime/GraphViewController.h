@@ -11,7 +11,13 @@
 //#import <Charts/Charts.h>
 @import Charts;
 
-@interface GraphViewController : DemoBaseViewController
-//@property (weak, nonatomic) IBOutlet BarChartView *barChartView;
+@interface GraphViewController : DemoBaseViewController <UITabBarDelegate> {
+    
+    UISegmentedControl *modeSwitch;
+}
+
+@property (nonatomic, retain) IBOutlet UISegmentedControl *modeSwitch;
+
+- (IBAction)modeChanged:(id)sender;
 
 @end

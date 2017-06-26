@@ -18,32 +18,56 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    
-//    DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
-//    
-//    NSString *query = [NSString stringWithFormat:@"SELECT * FROM activities"];
-//    NSArray *activities = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
-//    
-//    if ([activities count] == 0) {
-//        query = [NSString stringWithFormat:
-//                 @"CREATE TABLE `activities` ( \
-//                     `id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \
-//                     `category`	TEXT, \
-//                     `duration`	INTEGER, \
-//                     `efficiency`	INTEGER, \
-//                     `description`	TEXT, \
-//                     `finish_time`	INTEGER \
-//                 );"];
-//        //[dbManager executeQuery:query];
-//        
-//        query = [NSString stringWithFormat:@"INSERT INTO `activities`(`id`,`category`,`duration`,`efficiency`,`description`,`finish_time`) VALUES (1,'Work',10,60,'boi','6969696');"];
-//        [dbManager executeQuery:query];
-//        
-//        query = [NSString stringWithFormat:@"SELECT * FROM activities"];
-//        activities = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
-//    }
-    
     return YES;
+}
+
+- (void)registerDefaultsFromSettingsBundle
+{
+    /*
+     before a user saves a nsdefault the entries in the settings bundle config file are not registereed.
+     The function loops through each preference in the root.plist of the settings.bundle file and registers each key that is not readable (therefore not registered).
+     */
+    //NSLog(@"Registering default values from Settings.bundle");
+    NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
+    [defs synchronize];
+    
+    NSString *settingsBundle = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"bundle"];
+    
+    if(!settingsBundle)
+    {
+        NSLog(@"Could not find Settings.bundle");
+        return;
+    }
+    
+    NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
+    if(!settings)
+        return;
+    
+    NSArray *preferences = [settings objectForKey:@"PreferenceSpecifiers"];
+    if(!preferences)
+        return;
+    NSMutableDictionary *defaultsToRegister = [[NSMutableDictionary alloc] initWithCapacity:[preferences count]];
+    
+    for (NSDictionary *prefSpecification in preferences)
+    {
+        NSString *key = [prefSpecification objectForKey:@"Key"];
+        NSLog(@"key: %@", key);
+        if (key)
+        {
+            // check if value readable in userDefaults
+            id currentObject = [defs objectForKey:key];
+            if (currentObject == nil)
+            {
+                // not readable: set value from Settings.bundle
+                id objectToSet = [prefSpecification objectForKey:@"DefaultValue"];
+                [defaultsToRegister setObject:objectToSet forKey:key];
+                // NSLog(@"Setting object %@ for key %@", objectToSet, key);
+            }
+        }
+    }
+    
+    [defs registerDefaults:defaultsToRegister];
+    [defs synchronize];
 }
 
 

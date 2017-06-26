@@ -59,7 +59,7 @@
     // SELECT name FROM sqlite_master WHERE type = "table"
     
     
-    NSString *findCategoryIndexQuery = [NSString stringWithFormat:@"SELECT * FROM categories WHERE name LIKE \"%@\"", _category];
+    NSString *findCategoryIndexQuery = [NSString stringWithFormat:@"SELECT * FROM categories WHERE name LIKE \"%@\" ORDER BY cat_order", _category];
     int categoryIndex = [[[[dbManager loadDataFromDB:findCategoryIndexQuery] objectAtIndex:0] objectAtIndex:0] intValue];
     
     

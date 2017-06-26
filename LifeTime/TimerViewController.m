@@ -33,15 +33,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"DANK MEMES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    
     _firstStartButtonPressed = false;
     _resetPressed = false;
     _stopPressed = false;
     _timer = [[Timer alloc] init];
+    
+    [_startButton addTarget:self action:@selector(startButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    _painter = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0 target:self
+                                                                    selector:@selector(paintTimer)
+                                                                  userInfo:nil
+                                                                   repeats:YES];
+    
+    _descriptionTextField.delegate = self;
+}
 
+- (void)viewWillAppear:(BOOL)animated {
     DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
-    NSString *query = [NSString stringWithFormat:@"%@", @"SELECT * FROM categories"];
+    NSString *query = [NSString stringWithFormat:@"%@", @"SELECT * FROM categories ORDER BY cat_order"];
     NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
     
     _activityCategories = [[NSMutableArray alloc] initWithCapacity:result.count];
@@ -52,14 +61,7 @@
     _categoryPicker.dataSource = self;
     _categoryPicker.delegate = self;
     
-    [_startButton addTarget:self action:@selector(startButton) forControlEvents:UIControlEventTouchUpInside];
-    
-    _painter = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0 target:self
-                                                                    selector:@selector(paintTimer)
-                                                                  userInfo:nil
-                                                                   repeats:YES];
-    
-    _descriptionTextField.delegate = self;
+    [self.view setNeedsDisplay];
 }
 
 - (void)didReceiveMemoryWarning {
