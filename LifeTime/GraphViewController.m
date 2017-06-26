@@ -17,10 +17,6 @@
 @end
 
 @implementation GraphViewController {
-//    NSArray *activities;
-//    NSMutableArray *categories;
-//    int lastSamePeriodActivityStartIndex;
-//    int lastSamePeriodActivityEndIndex;
     NSArray *weekdays;
     NSArray *weeks;
     NSArray *months;
@@ -35,24 +31,24 @@
     weeks = [NSArray arrayWithObjects: @"Week 1", @"Month 2", @"Week 3", @"Week 4", nil];
     months = [NSArray arrayWithObjects: @"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec", nil];
 
-    DBManager *dbManager1 = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
-    NSString *selectActivitiesQuery = [NSString stringWithFormat:@"SELECT * FROM activities"];
-    NSArray *activities = [dbManager1 loadDataFromDB:selectActivitiesQuery];
-    NSLog(@"%@\n%@\n\n\n", selectActivitiesQuery, activities);
-    NSLog(@"%@ activities: ", activities);
-
-    // re-reading from db, because dbManger code is bad
-    DBManager *dbManager2 = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
-    NSString *categoriesQuery = [NSString stringWithFormat:@"%@", @"SELECT * FROM categories ORDER BY cat_order"];
-    NSArray *result = [[NSArray alloc] initWithArray:[dbManager2 loadDataFromDB:categoriesQuery]];
-    
-    // make a categories array with the categories inside
-////    categories = [[NSMutableArray alloc] initWithCapacity:result.count];
-//    for (int i = 0; i < result.count; i++) {
-//        [categories addObject:[result[i] objectAtIndex:1]];
-//    }
-//    NSLog(@"%@ categories: ", categories);
+//    DBManager *dbManager1 = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
+//    NSString *selectActivitiesQuery = [NSString stringWithFormat:@"SELECT * FROM activities"];
+//    NSArray *activities = [dbManager1 loadDataFromDB:selectActivitiesQuery];
+//    NSLog(@"%@\n%@\n\n\n", selectActivitiesQuery, activities);
+//    NSLog(@"%@ activities: ", activities);
+//
+//    // re-reading from db, because dbManger code is bad
+//    DBManager *dbManager2 = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
+//    NSString *categoriesQuery = [NSString stringWithFormat:@"%@", @"SELECT * FROM categories ORDER BY cat_order"];
+//    NSArray *result = [[NSArray alloc] initWithArray:[dbManager2 loadDataFromDB:categoriesQuery]];
 //    
+//    // make a categories array with the categories inside
+//////    categories = [[NSMutableArray alloc] initWithCapacity:result.count];
+////    for (int i = 0; i < result.count; i++) {
+////        [categories addObject:[result[i] objectAtIndex:1]];
+////    }
+////    NSLog(@"%@ categories: ", categories);
+//
     self.options = @[
                      @{@"key": @"toggleValues", @"label": @"Toggle Values"},
                      @{@"key": @"toggleIcons", @"label": @"Toggle Icons"},
@@ -170,19 +166,12 @@
     [self drawPieChart:period];
     [self.view setNeedsDisplay];
     
+    [self evalEff];
+    
     [self.barChartView animateWithYAxisDuration:1.0];
     [self.pieChartView animateWithYAxisDuration:1.0];
 }
 
-//------------------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
-//-------------------------------------------------------------BAR CHART--------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------Draw bar chart-----------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
 - (void)drawBarChart: (NSString *) period {
     NSMutableArray<BarChartDataEntry *> *efficiencyPercentages = [[NSMutableArray alloc] init];
     int numData = -1;
@@ -203,7 +192,6 @@
         factor = 28;
     }
     efficiencyPercentages = [self getAvgEffSQLite:numData num:factor];
-
     
     NSLog(@" %@", efficiencyPercentages);
 
@@ -300,7 +288,6 @@
     _pieChartView.data = data;
     _pieChartView.legend.enabled = FALSE; // disabling the legends (litle squares)
     [_pieChartView highlightValues:nil];
-
 }
 
 -(NSMutableArray<PieChartDataEntry *> *) getDurationSumsSQLite: (int) numDays {
