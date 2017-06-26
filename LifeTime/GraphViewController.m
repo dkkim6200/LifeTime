@@ -189,7 +189,7 @@
 - (void)drawBarChart {
     NSMutableArray *yVals = [[NSMutableArray alloc] init];
     NSMutableArray *values = [[NSMutableArray alloc] init];
-    values = [self parseArray:[self avgEff] time: @"year"];
+    values = [self parseArray:[self avgEff] time: @"week"];
     int numData = values.count;
     for (int i = 0; i < numData; i++) {
         [yVals addObject:[[BarChartDataEntry alloc] initWithX:numData-i y:[values[i] doubleValue] icon: [UIImage imageNamed:@"icon"]]]; // x values are 7-i to make the graph go from right-->left
@@ -280,7 +280,7 @@
         parseBoundary = 28;
         size = 12;
     }
-    NSMutableArray *weekArray = [[NSMutableArray alloc] init];
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
     for (int i = 0; i < size; i++) {
         //        NSLog(@"%zd", avgEffArray[i]);
         int sum = 0;
@@ -289,8 +289,8 @@
         }
         [weekArray addObject:[NSNumber numberWithInt:sum/parseBoundary]];
     }
-    NSLog(@"weekArray: %@", weekArray);
-    return weekArray;
+    NSLog(@"dataArray: %@", dataArray);
+    return dataArray;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------
