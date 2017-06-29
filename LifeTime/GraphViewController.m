@@ -174,15 +174,6 @@
     [self.pieChartView animateWithYAxisDuration:1.0];
 }
 
-//------------------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
-//-------------------------------------------------------------BAR CHART--------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------Draw bar chart-----------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------------------
 - (void)drawBarChart: (NSString *) period {
     NSMutableArray<BarChartDataEntry *> *efficiencyPercentages = [[NSMutableArray alloc] init];
     int numData = -1;
@@ -237,8 +228,9 @@
     NSMutableArray<BarChartDataEntry *> *efficiencyPercentages = [[NSMutableArray alloc] init];
 
     for (int i = 0; i < numData; i++) {
+        // %+d forces the integer value to be printed with sign (+ or -) even if it is a positive value.
         DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
-        NSString *query = [NSString stringWithFormat:@"SELECT avg(efficiency) FROM activities WHERE finish_time BETWEEN datetime('now', 'localtime', '-%d days', 'start of day') AND datetime('now', 'localtime', '-%d days', 'start of day')", (numData-i)*factor, (numData-i-1)*factor];
+        NSString *query = [NSString stringWithFormat:@"SELECT avg(efficiency) FROM activities WHERE finish_time BETWEEN datetime('now', 'localtime', '%+d days', 'start of day') AND datetime('now', 'localtime', '%+d days', 'start of day')", (i-numData+1)*factor, (i-numData+2)*factor];
         NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
         
         if (result.count == 0) {
