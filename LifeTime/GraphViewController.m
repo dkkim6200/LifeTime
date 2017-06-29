@@ -9,6 +9,8 @@
 #import "GraphViewController.h"
 #import "LifeTime-Swift.h"
 #import "DBManager.h"
+#import "BarChartFormatter.m"
+
 @import Charts;
 
 @interface GraphViewController () <ChartViewDelegate>
@@ -224,21 +226,53 @@
 -(NSMutableArray<BarChartDataEntry *> *) getAvgEffSQLite: (int) numData num:(int) factor {
     NSMutableArray<BarChartDataEntry *> *efficiencyPercentages = [[NSMutableArray alloc] init];
 
+    /* storyboard resizing은 거의 다했는데 UIButton 사이즈가 말을 잘 안듣네;; 미안하다 수고해!! 
+    */
+    
+    BarChartFormatter *formatter = [[BarChartFormatter alloc] init];
+    ChartXAxis *xAxis = [[ChartXAxis alloc] init];
+    
+    int todayIndex = [self getIndexOfTodaySubstring];
     for (int i = 0; i < numData; i++) {
         DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
         NSString *query = [NSString stringWithFormat:@"SELECT avg(efficiency) FROM activities WHERE finish_time BETWEEN datetime('now', 'localtime', '-%d days', 'start of day') AND datetime('now', 'localtime', '-%d days', 'start of day')", (numData-i)*factor, (numData-i-1)*factor];
         NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
         
+
         if (result.count == 0) {
-            [efficiencyPercentages addObject:[[BarChartDataEntry alloc] initWithX:i y:0.0 icon: [UIImage imageNamed:@"icon"]]];
+//            [efficiencyPercentages addObject:[[BarChartDataEntry alloc] initWithX:i y:0.0 icon: [UIImage imageNamed:@"icon"]]];
+//            [efficiencyPercentages addObject:[[BarChartDataEntry alloc] initWithX: weekdays [numData%todayIndex++] y:0.0 icon: [UIImage imageNamed:@"icon"]]];
+            formatter.stringForValue:0.0 (double) axis:xAxis; // formatter 장면
+
         }
         else {
-            [efficiencyPercentages addObject:[[BarChartDataEntry alloc] initWithX:i y:[result[0][0] doubleValue] icon: [UIImage imageNamed:@"icon"]]];
+//            [efficiencyPercentages addObject:[[BarChartDataEntry alloc] initWithX:i y:[result[0][0] doubleValue] icon: [UIImage imageNamed:@"icon"]]];
+//            [efficiencyPercentages addObject:[[BarChartDataEntry alloc] initWithX:numData % todayIndex y:[result[0][0] doubleValue] icon: [UIImage imageNamed:@"icon"]]];
+            [formatter stringForValue:[result[0][0] doubleValue]  (double) axis:xAxis];
+
         }
     }
-    
+    xAxis.valueFormatter = formatter;
+    _barChartView.xAxis.valueFormatter = xAxis.valueFormatter;
+
     return efficiencyPercentages;
 }
+- (int) getIndexOfTodaySubstring {
+    int index;
+    NSDate *startTime = [NSDate date];
+    NSDateFormatter *formatDate = [[NSDateFormatter alloc] init];
+    [formatDate setTimeStyle:NSDateFormatterMediumStyle];
+    [formatDate setDateFormat:@"EEEE"];
+    NSString *date = [formatDate stringFromDate:startTime];
+    NSString *substringDate = [date substringWithRange:NSMakeRange(0, 3)];
+    substringDate = [substringDate capitalizedString]; // capitalizes every word
+
+    NSLog(@"today substring: %@", substringDate);
+    index = [weekdays indexOfObject:substringDate];
+    NSLog(@"index: %d", index);
+    return index;
+}
+
 - (void)drawPieChart: (NSString *) period {
     NSMutableArray<PieChartDataEntry *> *durationSums = [[NSMutableArray alloc] init];
     int numDays = -1;
@@ -313,29 +347,38 @@
     DBManager *dbManager = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
     NSString *query = [NSString stringWithFormat:@"SELECT avg(efficiency) FROM activities WHERE finish_time BETWEEN datetime('now', 'localtime', 'start of day') AND datetime('now', 'localtime')"];
     NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
-    
-    return [result[0][0] intValue];
+    if ((result == nil || result.count == 0)) {
+        return 0;
+    }
+    else {
+        return [result[0][0] intValue];
+    }
 }
 
 -(void) evalEff {
     int avg = [self getDailyAvgEff];
     NSString *daily;
     NSString *msg;
-
-    daily = [NSString stringWithFormat:@"You have been %d%% efficient today!", avg];
-    NSLog(@"effAvg: %d", avg);
     
-    if (avg > 90) {
-        msg = [NSString stringWithFormat:@"Good job! You had a really productive day!"];
+    if (avg == 0) {
+        daily = [NSString stringWithFormat:@"No activities recorded today"];
     }
-    else if (avg > 70) {
-        msg = [NSString stringWithFormat:@"Hey! That was a pretty decent day!"];
-    }
-    else if (avg >50) {
-        msg = [NSString stringWithFormat:@"Tommorow can be better."];
-    }
-    else if (avg <= 50) {
-        msg = [NSString stringWithFormat:@"Bruh."];
+    else {
+        daily = [NSString stringWithFormat:@"You have been %d%% efficient today!", avg];
+        NSLog(@"effAvg: %d", avg);
+        
+        if (avg > 90) {
+            msg = [NSString stringWithFormat:@"Good job! You had a really productive day!"];
+        }
+        else if (avg > 70) {
+            msg = [NSString stringWithFormat:@"Hey! That was a pretty decent day!"];
+        }
+        else if (avg >50) {
+            msg = [NSString stringWithFormat:@"Tommorow can be better."];
+        }
+        else if (avg <= 50) {
+            msg = [NSString stringWithFormat:@"Bruh."];
+        }
     }
     _dailyAvgEff.text = daily; // putting the messages on the label
     _dailyMsg.text = msg;

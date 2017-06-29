@@ -10,7 +10,7 @@
 		073203EA1E5206FA00991F19 /* EfficiencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073203E91E5206FA00991F19 /* EfficiencyViewController.m */; };
 		074B47D61EE3F07C00B0CE86 /* DemoBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 074B47D51EE3F07C00B0CE86 /* DemoBaseViewController.m */; };
 		076F3DB31E17771E006999E9 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 076F3DB21E17771E006999E9 /* Timer.m */; };
-		07ADCFAC1E1C75F600EA7BA9 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ADCFAB1E1C75F600EA7BA9 /* Activity.m */; };
+		07C60DCF1F0491AA0078ECBF /* BarChartFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C60DCE1F0491A90078ECBF /* BarChartFormatter.m */; };
 		07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E14DB61E136E11002A6ED0 /* TimerViewController.m */; };
 		83120A761EC80666005CE37F /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83120A751EC80666005CE37F /* GraphViewController.m */; };
 		836E08D91E175F0D00B3FEA5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 836E08D81E175F0D00B3FEA5 /* DBManager.m */; };
@@ -72,9 +72,8 @@
 		074B47D51EE3F07C00B0CE86 /* DemoBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DemoBaseViewController.m; path = Charts/ChartsDemo/Classes/DemoBaseViewController.m; sourceTree = SOURCE_ROOT; };
 		076F3DB11E17771E006999E9 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		076F3DB21E17771E006999E9 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
-		07ADCFAA1E1C75F600EA7BA9 /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
-		07ADCFAB1E1C75F600EA7BA9 /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
 		07B8CB971EC80341003570BF /* LifeTime-Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LifeTime-Swift.h"; sourceTree = SOURCE_ROOT; };
+		07C60DCE1F0491A90078ECBF /* BarChartFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarChartFormatter.m; sourceTree = "<group>"; };
 		07E14DB51E136E11002A6ED0 /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		07E14DB61E136E11002A6ED0 /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
 		83120A741EC80666005CE37F /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
@@ -191,8 +190,7 @@
 				8385BE101E25B70D0081A8C3 /* ViewControllers */,
 				836E08D71E175F0D00B3FEA5 /* DBManager.h */,
 				836E08D81E175F0D00B3FEA5 /* DBManager.m */,
-				07ADCFAA1E1C75F600EA7BA9 /* Activity.h */,
-				07ADCFAB1E1C75F600EA7BA9 /* Activity.m */,
+				07C60DCE1F0491A90078ECBF /* BarChartFormatter.m */,
 				076F3DB11E17771E006999E9 /* Timer.h */,
 				076F3DB21E17771E006999E9 /* Timer.m */,
 				83D84EA21E136BB100FF2B04 /* Assets.xcassets */,
@@ -310,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07C60DCF1F0491AA0078ECBF /* BarChartFormatter.m in Sources */,
 				8385BE0F1E25B6770081A8C3 /* EFCircularSlider.m in Sources */,
 				83B2AB7F1EFF23C900C05132 /* CategoryManagerViewController.m in Sources */,
 				073203EA1E5206FA00991F19 /* EfficiencyViewController.m in Sources */,
@@ -318,7 +317,6 @@
 				83D84E9B1E136BB100FF2B04 /* AppDelegate.m in Sources */,
 				83120A761EC80666005CE37F /* GraphViewController.m in Sources */,
 				83D84E981E136BB100FF2B04 /* main.m in Sources */,
-				07ADCFAC1E1C75F600EA7BA9 /* Activity.m in Sources */,
 				074B47D61EE3F07C00B0CE86 /* DemoBaseViewController.m in Sources */,
 				836E08D91E175F0D00B3FEA5 /* DBManager.m in Sources */,
 			);

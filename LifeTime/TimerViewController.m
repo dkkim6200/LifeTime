@@ -8,7 +8,7 @@
 
 #import "Timer.h"
 #import "TimerViewController.h"
-#import "Activity.h"
+//#import "Activity.h"
 #import "EfficiencyViewController.h"
 #import "DBManager.h"
 
@@ -33,12 +33,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _timerLabel.adjustsFontSizeToFitWidth = YES;
+    
+    CGSize labelSize = [_timerLabel.text sizeWithFont:_timerLabel.font
+                                constrainedToSize:_timerLabel.frame.size
+                                    lineBreakMode:NSLineBreakByWordWrapping];
+    
+    CGFloat labelHeight = labelSize.height;
+    CGFloat labelWidth = labelSize.width;
+
+    NSLog(@"width: %f and height: %f", labelWidth, labelHeight);
+    
     _firstStartButtonPressed = false;
     _resetPressed = false;
     _stopPressed = false;
     _timer = [[Timer alloc] init];
     
     [_startButton addTarget:self action:@selector(startButton) forControlEvents:UIControlEventTouchUpInside];
+    _startButton.titleLabel.minimumScaleFactor = 0.01f;
+    _startButton.titleLabel.numberOfLines = 0;
+    _startButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    _startButton.titleLabel.lineBreakMode = NSLineBreakByClipping;
     
     _painter = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0 target:self
                                                                     selector:@selector(paintTimer)
