@@ -21,10 +21,11 @@
     
 #define SLIDER_SIZE 300
     
-    CGRect sliderFrame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - SLIDER_SIZE) / 2,
-                                    ([[UIScreen mainScreen] bounds].size.height - SLIDER_SIZE) / 2,
-                                    SLIDER_SIZE,
-                                    SLIDER_SIZE);
+//    CGRect sliderFrame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - SLIDER_SIZE) / 2,
+//                                    ([[UIScreen mainScreen] bounds].size.height - SLIDER_SIZE) / 2,
+//                                    SLIDER_SIZE,
+//                                    SLIDER_SIZE);
+    CGRect sliderFrame = _percentageRectView.frame;
     EFCircularSlider* circularSlider = [[EFCircularSlider alloc] initWithFrame:sliderFrame];
     [circularSlider addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
     

@@ -17,8 +17,8 @@
 		836E08DC1E176D5D00B3FEA5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 836E08DB1E176D5D00B3FEA5 /* libsqlite3.tbd */; };
 		83856CC61ECA881E004ACD7A /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83856CC31ECA8819004ACD7A /* Charts.framework */; };
 		83856CC71ECA881E004ACD7A /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83856CC31ECA8819004ACD7A /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8385B9561E5C0334000C53A0 /* lifetime_db.db in Resources */ = {isa = PBXBuildFile; fileRef = 8385B9551E5BFC58000C53A0 /* lifetime_db.db */; };
 		8385BE0F1E25B6770081A8C3 /* EFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8385BE0E1E25B6770081A8C3 /* EFCircularSlider.m */; };
+		8390EF291F78AB1C0085ADFB /* lifetime_db.db in Resources */ = {isa = PBXBuildFile; fileRef = 8385B9551E5BFC58000C53A0 /* lifetime_db.db */; };
 		83B2AB7F1EFF23C900C05132 /* CategoryManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B2AB7E1EFF23C900C05132 /* CategoryManagerViewController.m */; };
 		83D84E981E136BB100FF2B04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E971E136BB100FF2B04 /* main.m */; };
 		83D84E9B1E136BB100FF2B04 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D84E9A1E136BB100FF2B04 /* AppDelegate.m */; };
@@ -296,10 +296,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8385B9561E5C0334000C53A0 /* lifetime_db.db in Resources */,
 				83D84EA61E136BB100FF2B04 /* LaunchScreen.storyboard in Resources */,
 				83D84EA31E136BB100FF2B04 /* Assets.xcassets in Resources */,
 				83D84EA11E136BB100FF2B04 /* Main.storyboard in Resources */,
+				8390EF291F78AB1C0085ADFB /* lifetime_db.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

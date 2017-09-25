@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *percentageLabel;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+@property (weak, nonatomic) IBOutlet UIView *percentageRectView;
 
 @property (nonatomic) NSString *category;
 @property (nonatomic) NSString *desc;
