@@ -156,7 +156,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (IBAction)editButtonPressed:(id)sender{
+- (IBAction)editButtonPressed:(id)sender {
     if(self.editing) {
         for (int i = 0; i < [self.tableView numberOfRowsInSection:0]; i++) {
             UITableViewCell *curCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
@@ -169,19 +169,20 @@
         [super setEditing:NO animated:YES];
         [self setEditing:NO animated:YES];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                              target:nil
+                                                                                              target:self
                                                                                               action:@selector(editButtonPressed:)];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                              target:nil
-                                                                                              action:@selector(doneButtonPressed:)];
+                                                                                               target:self
+                                                                                               action:@selector(doneButtonPressed:)];
     }
     else {
         [super setEditing:YES animated:YES];
         [self setEditing:YES animated:YES];
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                                                                              target:nil
-                                                                                              action:@selector(editButtonPressed:)];
+                                                                                               target:self
+                                                                                               action:@selector(editButtonPressed:)];
+        NSLog(@"");
     }
 }
 

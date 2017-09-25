@@ -50,7 +50,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     DBManager *dbManager1 = [[DBManager alloc] initWithDatabaseFilename:@"lifetime_db.db"];
-    NSString *query = [NSString stringWithFormat:@"%@", @"SELECT * FROM categories"];
+    NSString *query = [NSString stringWithFormat:@"%@", @"SELECT * FROM categories ORDER BY cat_order"];
     NSArray *result = [[NSArray alloc] initWithArray:[dbManager1 loadDataFromDB:query]];
     
     _activityCategories = [[NSMutableArray alloc] initWithCapacity:result.count];

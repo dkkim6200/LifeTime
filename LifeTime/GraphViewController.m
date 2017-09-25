@@ -319,7 +319,11 @@
     NSString *query = [NSString stringWithFormat:@"SELECT avg(efficiency) FROM activities WHERE finish_time BETWEEN datetime('now', 'localtime', 'start of day') AND datetime('now', 'localtime')"];
     NSArray *result = [[NSArray alloc] initWithArray:[dbManager loadDataFromDB:query]];
     
-    return [result[0][0] intValue];
+    if (result.count == 0) {
+        return -1;
+    } else {
+        return [result[0][0] intValue];
+    }
 }
 
 -(void) evalEff {
@@ -339,8 +343,12 @@
     else if (avg >50) {
         msg = [NSString stringWithFormat:@"Tommorow can be better."];
     }
-    else if (avg <= 50) {
+    else if (avg <= 50 && avg >= 0) {
         msg = [NSString stringWithFormat:@"Bruh."];
+    }
+    else if (avg <= -1) {
+        daily = [NSString stringWithFormat:@"You don't have any record."];
+        msg = [NSString stringWithFormat:@""];
     }
     _dailyAvgEff.text = daily; // putting the messages on the label
     _dailyMsg.text = msg;
