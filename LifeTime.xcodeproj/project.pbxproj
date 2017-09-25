@@ -13,12 +13,12 @@
 		07ADCFAC1E1C75F600EA7BA9 /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 07ADCFAB1E1C75F600EA7BA9 /* Activity.m */; };
 		07E14DB71E136E11002A6ED0 /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07E14DB61E136E11002A6ED0 /* TimerViewController.m */; };
 		83120A761EC80666005CE37F /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83120A751EC80666005CE37F /* GraphViewController.m */; };
-		8351D0DC1F78C6F700BD614B /* timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0D91F78C6F700BD614B /* timer.png */; };
-		8351D0DD1F78C6F700BD614B /* timer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0DA1F78C6F700BD614B /* timer@2x.png */; };
-		8351D0DE1F78C6F700BD614B /* timer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0DB1F78C6F700BD614B /* timer@3x.png */; };
-		8351D0E31F78C75F00BD614B /* report.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0E01F78C75F00BD614B /* report.png */; };
-		8351D0E41F78C75F00BD614B /* report@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0E11F78C75F00BD614B /* report@2x.png */; };
-		8351D0E51F78C75F00BD614B /* report@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0E21F78C75F00BD614B /* report@3x.png */; };
+		8351D0F01F78D68A00BD614B /* report.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0ED1F78D68A00BD614B /* report.png */; };
+		8351D0F11F78D68A00BD614B /* report@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0EE1F78D68A00BD614B /* report@2x.png */; };
+		8351D0F21F78D68A00BD614B /* report@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0EF1F78D68A00BD614B /* report@3x.png */; };
+		8351D0F71F78D69000BD614B /* timer.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0F41F78D69000BD614B /* timer.png */; };
+		8351D0F81F78D69000BD614B /* timer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0F51F78D69000BD614B /* timer@2x.png */; };
+		8351D0F91F78D69000BD614B /* timer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8351D0F61F78D69000BD614B /* timer@3x.png */; };
 		836E08D91E175F0D00B3FEA5 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 836E08D81E175F0D00B3FEA5 /* DBManager.m */; };
 		836E08DC1E176D5D00B3FEA5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 836E08DB1E176D5D00B3FEA5 /* libsqlite3.tbd */; };
 		83856CC61ECA881E004ACD7A /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83856CC31ECA8819004ACD7A /* Charts.framework */; };
@@ -85,12 +85,12 @@
 		07E14DB61E136E11002A6ED0 /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
 		83120A741EC80666005CE37F /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
 		83120A751EC80666005CE37F /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
-		8351D0D91F78C6F700BD614B /* timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timer.png; sourceTree = "<group>"; };
-		8351D0DA1F78C6F700BD614B /* timer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timer@2x.png"; sourceTree = "<group>"; };
-		8351D0DB1F78C6F700BD614B /* timer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timer@3x.png"; sourceTree = "<group>"; };
-		8351D0E01F78C75F00BD614B /* report.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = report.png; sourceTree = "<group>"; };
-		8351D0E11F78C75F00BD614B /* report@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "report@2x.png"; sourceTree = "<group>"; };
-		8351D0E21F78C75F00BD614B /* report@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "report@3x.png"; sourceTree = "<group>"; };
+		8351D0ED1F78D68A00BD614B /* report.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = report.png; sourceTree = "<group>"; };
+		8351D0EE1F78D68A00BD614B /* report@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "report@2x.png"; sourceTree = "<group>"; };
+		8351D0EF1F78D68A00BD614B /* report@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "report@3x.png"; sourceTree = "<group>"; };
+		8351D0F41F78D69000BD614B /* timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timer.png; sourceTree = "<group>"; };
+		8351D0F51F78D69000BD614B /* timer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timer@2x.png"; sourceTree = "<group>"; };
+		8351D0F61F78D69000BD614B /* timer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timer@3x.png"; sourceTree = "<group>"; };
 		836E08D71E175F0D00B3FEA5 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		836E08D81E175F0D00B3FEA5 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		836E08DB1E176D5D00B3FEA5 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -139,31 +139,31 @@
 		8351D0CD1F78C37600BD614B /* icons */ = {
 			isa = PBXGroup;
 			children = (
-				8351D0DF1F78C75F00BD614B /* report */,
-				8351D0D81F78C6F700BD614B /* timer */,
+				8351D0F31F78D69000BD614B /* timer */,
+				8351D0EC1F78D68A00BD614B /* report */,
 			);
 			name = icons;
 			path = EFCircularSlider;
 			sourceTree = "<group>";
 		};
-		8351D0D81F78C6F700BD614B /* timer */ = {
+		8351D0EC1F78D68A00BD614B /* report */ = {
 			isa = PBXGroup;
 			children = (
-				8351D0D91F78C6F700BD614B /* timer.png */,
-				8351D0DA1F78C6F700BD614B /* timer@2x.png */,
-				8351D0DB1F78C6F700BD614B /* timer@3x.png */,
-			);
-			path = timer;
-			sourceTree = "<group>";
-		};
-		8351D0DF1F78C75F00BD614B /* report */ = {
-			isa = PBXGroup;
-			children = (
-				8351D0E01F78C75F00BD614B /* report.png */,
-				8351D0E11F78C75F00BD614B /* report@2x.png */,
-				8351D0E21F78C75F00BD614B /* report@3x.png */,
+				8351D0ED1F78D68A00BD614B /* report.png */,
+				8351D0EE1F78D68A00BD614B /* report@2x.png */,
+				8351D0EF1F78D68A00BD614B /* report@3x.png */,
 			);
 			path = report;
+			sourceTree = "<group>";
+		};
+		8351D0F31F78D69000BD614B /* timer */ = {
+			isa = PBXGroup;
+			children = (
+				8351D0F41F78D69000BD614B /* timer.png */,
+				8351D0F51F78D69000BD614B /* timer@2x.png */,
+				8351D0F61F78D69000BD614B /* timer@3x.png */,
+			);
+			path = timer;
 			sourceTree = "<group>";
 		};
 		836E08DA1E176D5D00B3FEA5 /* Frameworks */ = {
@@ -347,16 +347,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8351D0F11F78D68A00BD614B /* report@2x.png in Resources */,
+				8351D0F21F78D68A00BD614B /* report@3x.png in Resources */,
 				83D84EA61E136BB100FF2B04 /* LaunchScreen.storyboard in Resources */,
-				8351D0E31F78C75F00BD614B /* report.png in Resources */,
+				8351D0F81F78D69000BD614B /* timer@2x.png in Resources */,
 				83D84EA31E136BB100FF2B04 /* Assets.xcassets in Resources */,
-				8351D0E41F78C75F00BD614B /* report@2x.png in Resources */,
 				83D84EA11E136BB100FF2B04 /* Main.storyboard in Resources */,
-				8351D0E51F78C75F00BD614B /* report@3x.png in Resources */,
-				8351D0DD1F78C6F700BD614B /* timer@2x.png in Resources */,
+				8351D0F71F78D69000BD614B /* timer.png in Resources */,
 				8390EF291F78AB1C0085ADFB /* lifetime_db.db in Resources */,
-				8351D0DC1F78C6F700BD614B /* timer.png in Resources */,
-				8351D0DE1F78C6F700BD614B /* timer@3x.png in Resources */,
+				8351D0F01F78D68A00BD614B /* report.png in Resources */,
+				8351D0F91F78D69000BD614B /* timer@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
